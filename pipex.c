@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:28:18 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/12 20:42:42 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/14 09:17:37 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	run_command(char **argv, char **envp, int index);
 
 void	free_2d(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arr[i])
@@ -37,15 +37,12 @@ int	main(int argc, char **argv, char **envp)
 	pid_t	pid1;
 	int		i;
 
-	
 	if (argc < 5)
 	{
 		ft_printf("Not enough parameters.");
 		return (1);
 	}
-
 	i = 2;
-
 	// Open the input file
 	infile_fd = open(argv[1], O_RDONLY);
 	if (infile_fd < 0)
@@ -59,13 +56,11 @@ int	main(int argc, char **argv, char **envp)
 		perror("Failed to open output file");
 		return (1);
 	}
-	
 	if (pipe(pipe_fd) == -1)
 	{
 		perror("pipe");
 		return (1);
 	}
-
 	pid1 = fork();
 	if (pid1 == 0)
 	{
@@ -74,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		dup2(pipe_fd[1], STDOUT_FILENO); // output target is redirected to pipe
 		close(pipe_fd[0]); // close unused read end of the pipe in child
 		close(pipe_fd[1]); // close write end of the pipe because it is not needed after dup2
-		close(infile_fd);  // already duplicated
+		close(infile_fd); // already duplicated
 		run_command(argv, envp, i);
 	}
 	else
@@ -82,12 +77,13 @@ int	main(int argc, char **argv, char **envp)
 		waitpid(pid1, NULL, 0); // Wait for the first child to complete
 		dup2(pipe_fd[0], STDIN_FILENO); // input from pipe
 		dup2(outfile_fd, STDOUT_FILENO); // output to file
-		close(pipe_fd[1]); // close write end of the pipe in parent
-		close(pipe_fd[0]); // not needed after dup2
+		close(pipe_fd[0]); // close write end of the pipe in parent
+		close(pipe_fd[1]); // not needed after dup2
 		close(outfile_fd); // already duplicated
 		run_command(argv, envp, i + 1);
 	}
 }
+
 int	run_command(char **argv, char **envp, int index)
 {
 	int		i;
@@ -108,20 +104,14 @@ int	run_command(char **argv, char **envp, int index)
 		}
 		envp++;
 	}
-
 	if (!path_variable)
 	{
-        ft_printf("PATH variable not found.\n");
-        return (1);
-    }
-
+		ft_printf("PATH variable not found.\n");
+		return (1);
+	}
 	split_variable = ft_split(path_variable, ':');
-    command_with_arguments = ft_split(argv[index], ' ');
-    command = command_with_arguments[0];
-
-
-
-
+	command_with_arguments = ft_split(argv[index], ' ');
+	command = command_with_arguments[0];
 	i = 0;
 	while (split_variable[i])
 	{
@@ -130,14 +120,14 @@ int	run_command(char **argv, char **envp, int index)
 		free(full_path);
 		if (access(full_path_with_command, X_OK) == 0)
 		{
-			execve(full_path_with_command, command_with_arguments, envp);
+			execve(full_path_with_command, command_with_arguments, envp); // Where am I supposed to free full_path_with_command?
 			perror("Failed to execute command");
 		}
 		free(full_path_with_command);
 		i++;
 	}
 	ft_printf("Command not found.\n");
-    free_2d(command_with_arguments);
-    free_2d(split_variable);
+	free_2d(command_with_arguments);
+	free_2d(split_variable);
 	return (0);
 }
