@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 22:28:18 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/19 16:12:22 by upolat           ###   ########.fr       */
+/*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
+/*   Updated: 2024/05/19 15:28:45 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ int	main(int argc, char **argv, char **envp)
 	pid_t	pid2;
 	int		i;
 
-	if (argc != 5)
+	if (argc < 5)
 	{
-		perror("Not enough parameters.");
+		ft_printf("Not enough parameters.");
 		return (1);
 	}
 
@@ -228,3 +228,4 @@ int	run_command(char **argv, char **envp, int index)
 	free_2d_array((void **) split_variable);
 	return (0);
 }
+
