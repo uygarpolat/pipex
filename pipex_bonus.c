@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/19 15:28:45 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/19 20:13:13 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,9 @@
 #include "ft_printf.h"
 #include "libft.h"
 
-int	run_command(char **argv, char **envp, int index);
-/*
-void	free_2d(char **arr)
-{
-	int	i;
+int		run_command(char **argv, char **envp, int index);
+char	**ft_split_mod(char const *s, char c);
 
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-
-void	free_2d_int(int **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
-}
-*/
 void free_2d_array(void **arr)
 {
 	int i;
@@ -207,7 +188,7 @@ int	run_command(char **argv, char **envp, int index)
 		return (1);
 	}
 	split_variable = ft_split(path_variable, ':');
-	command_with_arguments = ft_split(argv[index], ' ');
+	command_with_arguments = ft_split_mod(argv[index], ' ');
 	command = command_with_arguments[0];
 	i = 0;
 	while (split_variable[i])

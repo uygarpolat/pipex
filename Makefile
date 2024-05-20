@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 01:50:15 by upolat            #+#    #+#              #
-#    Updated: 2024/05/19 15:56:33 by upolat           ###   ########.fr        #
+#    Updated: 2024/05/19 20:15:31 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
 BONUS_NAME = pipex_bonus
 SRC = pipex.c
-BONUS_SRC = pipex_bonus.c
+BONUS_SRC = pipex_bonus.c ft_split_mod.c
 LIBFTPRINTF = libftprintf.a
 
 OBJ = $(SRC:.c=.o)
