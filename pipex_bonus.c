@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/19 20:13:13 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/21 08:39:39 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 	{
-		ft_printf("Not enough parameters.");
-		return (1);
+		return (write(2, "Argument error!\n", 17), EXIT_FAILURE);
 	}
 
 	// Open the input file
