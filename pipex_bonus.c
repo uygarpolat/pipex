@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/21 08:39:39 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/21 14:43:57 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ int	run_command(char **argv, char **envp, int index)
 		return (1);
 	}
 	split_variable = ft_split(path_variable, ':');
-	command_with_arguments = ft_split_mod(argv[index], ' ');
+	command_with_arguments = ft_split(argv[index], ' ');
 	command = command_with_arguments[0];
 	i = 0;
 	while (split_variable[i])
