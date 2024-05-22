@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/21 14:43:57 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/23 00:10:46 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "libft.h"
 
 int		run_command(char **argv, char **envp, int index);
-char	**ft_split_mod(char const *s, char c);
+int		handle_here_doc(char *argv2);
 
 void free_2d_array(void **arr)
 {
@@ -38,16 +38,16 @@ void free_2d_array(void **arr)
 
 
 
-int	**fd_malloc(int argc)
+int	**fd_malloc(int argc, int heredoc_exists)
 {
 	int	i;
 	int	**fd;
 
 	i = 0;
-	fd = malloc(sizeof(int *) * (argc - 4 + 1));
+	fd = malloc(sizeof(int *) * (argc - 4 - heredoc_exists + 1));
 	if (fd == NULL)
 		return (0);
-	while (i < argc - 4)
+	while (i < argc - 4 - heredoc_exists)
 	{
 		fd[i] = malloc(sizeof(int) * 2);
 		if (fd[i] == NULL)
@@ -68,7 +68,7 @@ void	close_and_free(int **fd, int infile_fd, int outfile_fd, int argc)
 	i = 0;
 	close(infile_fd);
 	close(outfile_fd);
-	while (i < argc - 4)
+	while (i < argc - 4 - 1) // the minus one at the end is for heredoc_exists, REMOVE THE HARD CODING
 	{	
 		close(fd[i][0]);
 		close(fd[i][1]);
@@ -85,14 +85,22 @@ int	main(int argc, char **argv, char **envp)
 	pid_t	pid1;
 	pid_t	pid2;
 	int		i;
+	int		heredoc_exists;
 
 	if (argc < 5)
 	{
 		return (write(2, "Argument error!\n", 17), EXIT_FAILURE);
 	}
 
+	heredoc_exists = 0;
 	// Open the input file
-	infile_fd  = open(argv[1], O_RDONLY);
+	if (ft_strncmp(argv[1], "here_doc", 9) == 0)
+	{
+		heredoc_exists = 1;
+		infile_fd = handle_here_doc(argv[2]);
+	}
+	else
+		infile_fd  = open(argv[1], O_RDONLY);
 	if (infile_fd < 0)
 	{
 		perror("Failed to open input file");
@@ -106,9 +114,9 @@ int	main(int argc, char **argv, char **envp)
 		close(infile_fd);
 		return (1);
 	}
-	fd = fd_malloc(argc);
+	fd = fd_malloc(argc, heredoc_exists);
 	i = 0;
-	while (i < argc - 4)
+	while (i < argc - 4 - heredoc_exists)
 	{
 		if (pipe(fd[i]) == -1)
 		{
@@ -119,7 +127,7 @@ int	main(int argc, char **argv, char **envp)
 		i++;
 	}
 	i = 0;
-	while (i < argc - 4)
+	while (i < argc - 4 - heredoc_exists)
 	{
 		pid1 = fork();
 		if (pid1 == 0)
@@ -131,7 +139,7 @@ int	main(int argc, char **argv, char **envp)
 				dup2(fd[i - 1][0], STDIN_FILENO);
 			dup2(fd[i][1], STDOUT_FILENO);
 			close_and_free(fd, infile_fd, outfile_fd, argc);
-			run_command(argv, envp, i + 2);
+			run_command(argv, envp, i + 2 + heredoc_exists);
 		}
 
 		pid2 = fork();
@@ -139,12 +147,12 @@ int	main(int argc, char **argv, char **envp)
 		{
 			// Inside the second child process
 			dup2(fd[i][0], STDIN_FILENO);
-			if (i == argc - 5)
+			if (i == argc - 5 - heredoc_exists)
 				dup2(outfile_fd, STDOUT_FILENO);
 			else
 				dup2(fd[i + 1][1], STDOUT_FILENO);
 			close_and_free(fd, infile_fd, outfile_fd, argc);
-			run_command(argv, envp, i + 3);
+			run_command(argv, envp, i + 3 + heredoc_exists);
 		}
 		i++;
 	}
@@ -152,7 +160,7 @@ int	main(int argc, char **argv, char **envp)
 	close_and_free(fd, infile_fd, outfile_fd, argc);
 
 	i = 0;
-	while (i < argc - 4)
+	while (i < argc - 4 - heredoc_exists)
 	{
 		waitpid(pid1, NULL, 0);
 		waitpid(pid2, NULL, 0);
