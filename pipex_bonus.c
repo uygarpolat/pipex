@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/23 08:50:29 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/23 09:21:24 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,9 +191,12 @@ int	run_command(char **argv, char **envp, int index)
 	{
 		full_path = ft_strjoin(split_variable[i], "/");
 		full_path_with_command = ft_strjoin(full_path, command);
+		//free(full_path_with_command);
+		//full_path_with_command = NULL;
 		free((void **)full_path);
 		if (access(full_path_with_command, X_OK) == 0)
 		{
+			//ft_printf("This is the PATH that worked: %s\n", full_path_with_command); // DELETE THIS!
 			execve(full_path_with_command, command_with_arguments, envp);
 			perror("Failed to execute command");
 		}
