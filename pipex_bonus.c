@@ -6,71 +6,11 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/23 23:39:05 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/24 15:26:14 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <fcntl.h>
 #include "pipex_bonus.h"
-
-int		run_command(char **argv, char **envp, int index);
-
-void	free_2d_array(void **arr)
-{
-	int	i;
-
-	i = 0;
-	if (!arr)
-		return ;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-int	**fd_malloc(int argc, int heredoc_exists)
-{
-	int	i;
-	int	**fd;
-
-	i = 0;
-	fd = malloc(sizeof(int *) * (argc - 4 - heredoc_exists + 1));
-	if (fd == NULL)
-		return (0);
-	while (i < argc - 4 - heredoc_exists)
-	{
-		fd[i] = malloc(sizeof(int) * 2);
-		if (fd[i] == NULL)
-		{
-			free_2d_array((void **)fd);
-			return (0);
-		}
-		i++;
-	}
-	fd[i] = 0;
-	return (fd);
-}
-
-void	close_and_free(int **fd, int infile_fd, int outfile_fd, int argc, int heredoc_exists)
-{
-	int	i;
-
-	i = 0;
-	close(infile_fd);
-	close(outfile_fd);
-	while (i < argc - 4 - heredoc_exists)
-	{
-		close(fd[i][0]);
-		close(fd[i][1]);
-		i++;
-	}
-	free_2d_array((void **)fd);
-}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -153,56 +93,5 @@ int	main(int argc, char **argv, char **envp)
 		waitpid(pid2, NULL, 0);
 		i++;
 	}
-	return (0);
-}
-
-int	run_command(char **argv, char **envp, int index)
-{
-	int		i;
-	char	*path_variable;
-	char	*full_path;
-	char	*full_path_with_command;
-	char	**split_variable;
-	char	**command_with_arguments;
-	char	*command;
-
-	path_variable = NULL;
-	while (*envp)
-	{
-		if (strncmp(*envp, "PATH=", 5) == 0)
-		{
-			path_variable = *envp + 5;
-			break ;
-		}
-		envp++;
-	}
-	if (!path_variable)
-	{
-		ft_printf("PATH variable not found.\n");
-		return (1);
-	}
-	split_variable = ft_split(path_variable, ':');
-	command_with_arguments = ft_split(argv[index], ' ');
-	command = command_with_arguments[0];
-	i = 0;
-	while (split_variable[i])
-	{
-		full_path = ft_strjoin(split_variable[i], "/");
-		full_path_with_command = ft_strjoin(full_path, command);
-		//free(full_path_with_command);
-		//full_path_with_command = NULL;
-		free((void **)full_path);
-		if (access(full_path_with_command, X_OK) == 0)
-		{
-			//ft_printf("This is the PATH that worked: %s\n", full_path_with_command); // DELETE THIS!
-			execve(full_path_with_command, command_with_arguments, envp);
-			perror("Failed to execute command");
-		}
-		free((void **)full_path_with_command);
-		i++;
-	}
-	ft_printf("Command not found.\n");
-	free_2d_array((void **)command_with_arguments);
-	free_2d_array((void **) split_variable);
 	return (0);
 }
