@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 15:26:14 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/24 17:57:04 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_strncmp(argv[1], "here_doc", 9) == 0)
 	{
 		heredoc_exists = 1;
-		infile_fd = handle_here_doc(argv[2]);
+		infile_fd = handle_here_doc(argc, argv[2]);
 	}
 	else
 		infile_fd = open(argv[1], O_RDONLY);

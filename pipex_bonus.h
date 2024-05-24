@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 16:41:31 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/24 17:55:44 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_fds
 	int	outfile_fd;
 }	t_fds;
 
-int		handle_here_doc(char *argv2);
+int		handle_here_doc(int argc, char *argv2);
 void	free_2d_array(void **arr);
 int		**fd_malloc(int argc, int heredoc_exists);
 void	close_and_free(int **fd, int infile_fd, int outfile_fd, int argc, int heredoc_exists);

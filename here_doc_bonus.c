@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/23 23:03:36 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/24 17:59:01 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,20 @@
 #include <fcntl.h>
 #include "pipex_bonus.h"
 
-int	handle_here_doc(char *argv2)
+int	handle_here_doc(int argc, char *argv2)
 {
 	int		fd;
 	int		fd2;
 	char	*str;
+	int		n;
 
 	fd = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 
 	while (1)
 	{
+		n = argc;
+		while (n-- > 5)
+			write(STDOUT_FILENO, "pipe ", 5);
 		write(STDOUT_FILENO, "heredoc> ", 9);
 		str = get_next_line(STDIN_FILENO);
 		if (!str)
