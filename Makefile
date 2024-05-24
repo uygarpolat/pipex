@@ -5,41 +5,58 @@
 #                                                     +:+ +:+         +:+      #
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/12 01:50:15 by upolat            #+#    #+#              #
-#    Updated: 2024/05/21 14:42:58 by upolat           ###   ########.fr        #
+#    Created: 2024/05/23 16:24:12 by upolat            #+#    #+#              #
+#    Updated: 2024/05/24 08:39:13 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
 NAME = pipex
-BONUS_NAME = pipex_bonus
-SRC = pipex.c
-BONUS_SRC = pipex_bonus.c
-LIBFTPRINTF = libftprintf.a
+NAME_BONUS = pipex_bonus
 
-OBJ = $(SRC:.c=.o)
-BONUS_OBJ = $(BONUS_SRC:.c=.o)
+SOURCES = 		./pipex.c
+SOURCES_BONUS = ./pipex_bonus.c ./here_doc_bonus.c
+
+OBJECTS = $(SOURCES:.c=.o)
+OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
+
+CFLAGS = -Wall -Wextra -Werror
+
+libft_dir := ./libft
+libft := $(libft_dir)/libft.a
+
+INCLUDES = -I./pipex.h -I$(libft_dir)
+INCLUDES_BONUS = -I./pipex_bonus.h -I$(libft_dir)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFTPRINTF)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFTPRINTF)
+$(libft):
+	make -C $(libft_dir)
 
-bonus: $(NAME) $(BONUS_NAME)
+$(NAME): $(libft) $(OBJECTS)
+	cc $(CFLAGS) $(INCLUDES) $^ -o $@
 
-$(BONUS_NAME): $(BONUS_OBJ) $(LIBFTPRINTF)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) -o $(BONUS_NAME) $(LIBFTPRINTF)
+bonus: .bonus
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+.bonus: $(NAME) $(NAME_BONUS)
+	@touch .bonus
+
+$(NAME_BONUS): $(libft) $(OBJECTS_BONUS)
+	cc $(CFLAGS) $(INCLUDES_BONUS) $^ -o $@
+
+%.o : %.c
+	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJECTS) $(OBJECTS_BONUS)
+	make -C $(libft_dir) clean
 
 fclean: clean
-	rm -f $(NAME) $(BONUS_NAME)
+	rm -f $(NAME) $(NAME_BONUS)
+	make -C $(libft_dir) fclean
+	rm -f .bonus
 
-re: fclean all
+re:	fclean all
 
-.PHONY: all bonus clean fclean re
+rebonus: fclean bonus
+
+.PHONY: all clean fclean re bonus rebonus

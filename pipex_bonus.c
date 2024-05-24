@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/23 09:21:24 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/23 23:39:05 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
-#include "ft_printf.h"
-#include "libft.h"
+#include "pipex_bonus.h"
 
 int		run_command(char **argv, char **envp, int index);
-int		handle_here_doc(char *argv2);
 
 void	free_2d_array(void **arr)
 {

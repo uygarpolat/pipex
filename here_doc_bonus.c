@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/22 15:34:19 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/23 23:03:36 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
-#include "ft_printf.h"
-#include "libft.h"
-#include "get_next_line.h"
+#include "pipex_bonus.h"
 
 int	handle_here_doc(char *argv2)
 {
