@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:28:18 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/29 21:50:47 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:39:17 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ int	main(int argc, char **argv, char **envp)
 		infile_fd = handle_here_doc(argv[2]);
 	}
 	else */
-		infile_fd = open(argv[1], O_RDONLY);
+	infile_fd = open(argv[1], O_RDONLY);
 	if (infile_fd < 0)
 	{
-		perror("Failed to open input file");
-		return (1);
+		ft_putstr_fd("pipex: ", 2);
+		ft_putstr_fd(argv[1], 2);
+		ft_putstr_fd(": No such file or directory", 2);
+		exit (0);
 	}
 	outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile_fd < 0)

@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 16:24:12 by upolat            #+#    #+#              #
-#    Updated: 2024/05/29 21:00:34 by upolat           ###   ########.fr        #
+#    Updated: 2024/05/30 15:28:07 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SOURCES = 		./pipex.c ./ft_split_3.c
 SOURCES_BONUS = ./pipex_bonus.c ./here_doc_bonus.c \
 				./close_and_free_bonus.c ./memory_handling_bonus.c \
 				./run_command_bonus.c ./ft_split_3.c \
+				./error_handler.c
 
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)

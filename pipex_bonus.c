@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/30 11:03:55 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/30 16:12:13 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ int	main(int argc, char **argv, char **envp)
 	int		infile_fd;
 	int		outfile_fd;
 	pid_t	**pid;
-	//pid_t	pid1;
-	//pid_t	pid2;
 	int		i;
 	int		heredoc_exists;
-
+	
 	if (argc < 5)
 	{
 		return (write(2, "Argument error!\n", 17), EXIT_FAILURE);
@@ -37,8 +35,8 @@ int	main(int argc, char **argv, char **envp)
 		infile_fd = open(argv[1], O_RDONLY);
 	if (infile_fd < 0)
 	{
-		perror("Failed to open input file");
-		return (1);
+		error_handler("pipex:", argv[1]);
+		exit (0);
 	}
 	outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile_fd < 0)
