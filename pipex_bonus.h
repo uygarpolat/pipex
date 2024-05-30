@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 17:55:44 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/29 20:40:14 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	free_2d_array(void **arr);
 int		**fd_malloc(int argc, int heredoc_exists);
 void	close_and_free(int **fd, int infile_fd, int outfile_fd, int argc, int heredoc_exists);
 int		run_command(char **argv, char **envp, int index);
+char	**ft_split_3(char *str);
 
 #endif

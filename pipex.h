@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:46:09 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 08:47:29 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/29 20:40:02 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # include "libft/libft.h"
 
 int	handle_here_doc(char *argv2);
+char	**ft_split_3(char *str);
 
 #endif

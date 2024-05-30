@@ -6,17 +6,17 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/23 16:24:12 by upolat            #+#    #+#              #
-#    Updated: 2024/05/24 15:24:43 by upolat           ###   ########.fr        #
+#    Updated: 2024/05/29 21:00:34 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 NAME_BONUS = pipex_bonus
 
-SOURCES = 		./pipex.c
+SOURCES = 		./pipex.c ./ft_split_3.c
 SOURCES_BONUS = ./pipex_bonus.c ./here_doc_bonus.c \
 				./close_and_free_bonus.c ./memory_handling_bonus.c \
-				./run_command_bonus.c \
+				./run_command_bonus.c ./ft_split_3.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)

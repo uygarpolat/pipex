@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 17:57:04 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/30 11:03:55 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	main(int argc, char **argv, char **envp)
 	int		**fd;
 	int		infile_fd;
 	int		outfile_fd;
-	pid_t	pid1;
-	pid_t	pid2;
+	pid_t	**pid;
+	//pid_t	pid1;
+	//pid_t	pid2;
 	int		i;
 	int		heredoc_exists;
 
@@ -58,11 +59,17 @@ int	main(int argc, char **argv, char **envp)
 		}
 		i++;
 	}
+	pid = malloc((argc - 3 - heredoc_exists) * sizeof(pid_t));
+	if (!pid)
+	{
+    	perror("Failed to allocate memory for pids");
+    	return (EXIT_FAILURE);
+	}
 	i = 0;
 	while (i < argc - 4 - heredoc_exists)
 	{
-		pid1 = fork();
-		if (pid1 == 0)
+		pid[i][0] = fork();
+		if (pid[i][0] == 0)
 		{
 			if (i == 0)
 				dup2(infile_fd, STDIN_FILENO);
@@ -72,8 +79,8 @@ int	main(int argc, char **argv, char **envp)
 			close_and_free(fd, infile_fd, outfile_fd, argc, heredoc_exists);
 			run_command(argv, envp, i + 2 + heredoc_exists);
 		}
-		pid2 = fork();
-		if (pid2 == 0)
+		pid[i][1] = fork();
+		if (pid[i][1] == 0)
 		{
 			dup2(fd[i][0], STDIN_FILENO);
 			if (i == argc - 5 - heredoc_exists)
@@ -89,9 +96,10 @@ int	main(int argc, char **argv, char **envp)
 	i = 0;
 	while (i < argc - 4 - heredoc_exists)
 	{
-		waitpid(pid1, NULL, 0);
-		waitpid(pid2, NULL, 0);
+		waitpid(pid[i][0], NULL, 0);
+		waitpid(pid[i][1], NULL, 0);
 		i++;
 	}
+	free_2d_array((void **) pid);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 14:40:47 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/30 11:07:15 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,32 @@ int	**fd_malloc(int argc, int heredoc_exists)
 	}
 	fd[i] = 0;
 	return (fd);
+}
+
+pid_t	**pids_malloc (int argc, int heredoc_exists)
+{
+	int		i;
+	int		num_iterations;
+	pid_t	**pids;
+
+	num_iterations = argc - 4 - heredoc_exists;
+	pids = malloc(num_iterations * sizeof(pid_t *));
+	if (!pids)
+	{
+		perror("Failed to allocate memory for pid pointers");
+		return (0);
+	}
+	i = 0;
+	while (i < num_iterations)
+	{
+		pids[i] = malloc(2 * sizeof(pid_t));
+		if (!pids[i])
+		{
+			perror("Failed to allocate memory for pid pointers");
+			free_2d_array((void **)pids);
+			return (0);
+		}
+		i++;
+	}
+	return(pids);
 }
