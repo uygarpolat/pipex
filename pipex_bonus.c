@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/30 16:12:13 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/31 12:57:48 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,11 @@ int	main(int argc, char **argv, char **envp)
 	else
 		infile_fd = open(argv[1], O_RDONLY);
 	if (infile_fd < 0)
-	{
-		error_handler("pipex:", argv[1]);
-		exit (0);
-	}
+		error_handler3(argv[1 + heredoc_exists], errno, 0);
 	outfile_fd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile_fd < 0)
-	{
-		perror("Failed to open output file");
-		close(infile_fd);
-		return (1);
-	}
+		error_handler3(argv[argc - 1], errno, 0);
+	
 	fd = fd_malloc(argc, heredoc_exists);
 	i = 0;
 	while (i < argc - 4 - heredoc_exists)

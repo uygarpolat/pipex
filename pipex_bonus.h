@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/30 15:26:45 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/31 12:52:18 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define PIPEX_BONUS_H
 
 # include <stdio.h>
-# include <unistd.h>
 # include <string.h>
+# include <unistd.h>
+# include <errno.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include "libft/libft.h"
 
 typedef struct s_vars
@@ -42,6 +44,6 @@ int		**fd_malloc(int argc, int heredoc_exists);
 void	close_and_free(int **fd, int infile_fd, int outfile_fd, int argc, int heredoc_exists);
 int		run_command(char **argv, char **envp, int index);
 char	**ft_split_3(char *str);
-int		error_handler(char *str1, char *str2);
+int		error_handler3(char *str, int errnum, int errorcode);
 
 #endif
