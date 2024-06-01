@@ -6,11 +6,11 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:35:41 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/31 22:04:09 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:06:00 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
 
 char	*get_path2(char **envp)
 {

@@ -6,11 +6,11 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:41:06 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/31 21:01:04 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:05:08 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
 
 void	close_and_free(t_vars *t)
 {

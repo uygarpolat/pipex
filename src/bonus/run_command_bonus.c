@@ -6,20 +6,18 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 15:05:02 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:06:15 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
+
 static void	execute_command(t_vars *t)
 {
 	if (access(t->full_path_with_command, F_OK) == 0)
 	{
 		if (access(t->full_path_with_command, X_OK) == 0)
-		{
-			//printf("full_path_with_command is: %s\n", t->full_path_with_command);
 			execve(t->full_path_with_command, t->command_with_arguments, t->envp);
-		}
 		error_handler3(t->full_path_with_command, errno, 126); 
 	}
 }
@@ -46,7 +44,7 @@ int	run_command(char **argv, t_vars *t, int index)
 		free((void **)t->full_path_with_command);
 		i++;
 	}
-	ft_printf("Command not found.\n");
+	error_handler3(t->command, errno, 0);
 	free_2d_array((void **)t->command_with_arguments);
 	free_2d_array((void **)t->split_variable);
 	return (0);

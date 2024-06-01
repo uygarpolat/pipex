@@ -6,11 +6,11 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 00:12:07 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:06:37 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
 
 void	error_handler3(char *str, int errnum, int errorcode)
 {

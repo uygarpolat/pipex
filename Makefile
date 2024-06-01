@@ -1,65 +1,61 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/23 16:24:12 by upolat            #+#    #+#              #
-#    Updated: 2024/05/31 22:58:10 by upolat           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = pipex
 
-NAME = pipex_bonus #CHANGE THIS <-----------------------------------------------------------------------
-NAME_BONUS = pipex #CHANGE THIS <-----------------------------------------------------------------------
+# Source directories
+SRC_DIR = src/mandatory
+SRC_BONUS_DIR = src/bonus
 
-SOURCES = 		./pipex.c ./ft_split_3.c
-SOURCES_BONUS = ./pipex_bonus.c ./here_doc_bonus.c \
-				./close_and_free_bonus.c ./memory_handling_bonus.c \
-				./run_command_bonus.c ./ft_split_3.c \
-				./error_handler_bonus.c ./open_files_bonus.c ./paths_bonus.c \
+# Source files
+SOURCES = 		$(SRC_DIR)/pipex.c $(SRC_DIR)/here_doc.c \
+                $(SRC_DIR)/close_and_free.c $(SRC_DIR)/memory_handling.c \
+                $(SRC_DIR)/run_command.c $(SRC_DIR)/ft_split_3.c \
+                $(SRC_DIR)/error_handler.c $(SRC_DIR)/open_files.c $(SRC_DIR)/paths.c
+SOURCES_BONUS = $(SRC_BONUS_DIR)/pipex_bonus.c $(SRC_BONUS_DIR)/here_doc_bonus.c \
+                $(SRC_BONUS_DIR)/close_and_free_bonus.c $(SRC_BONUS_DIR)/memory_handling_bonus.c \
+                $(SRC_BONUS_DIR)/run_command_bonus.c $(SRC_BONUS_DIR)/ft_split_3.c \
+                $(SRC_BONUS_DIR)/error_handler_bonus.c $(SRC_BONUS_DIR)/open_files_bonus.c $(SRC_BONUS_DIR)/paths_bonus.c
 
+# Object files
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
-libft_dir := ./libft
+# libft configuration
+libft_dir := libft
 libft := $(libft_dir)/libft.a
 
-INCLUDES = -I./pipex.h -I$(libft_dir)
-INCLUDES_BONUS = -I./pipex_bonus.h -I$(libft_dir)
+# Include directories
+INCLUDES = -I./include -I$(libft_dir)
 
 all: $(NAME)
 
-$(libft):
-	make -C $(libft_dir)
+$(NAME): $(OBJECTS) $(libft)
+	cc $(CFLAGS) $(INCLUDES) -L$(libft_dir) -lft $^ -o $@
 
-$(NAME): $(libft) $(OBJECTS)
-	cc $(CFLAGS) $(INCLUDES) $^ -o $@
+$(libft):
+	$(MAKE) -C $(libft_dir)
 
 bonus: .bonus
 
-.bonus: $(NAME) $(NAME_BONUS)
+.bonus: $(OBJECTS_BONUS) $(libft)
+	cc $(CFLAGS) $(INCLUDES) -L$(libft_dir) -lft $(OBJECTS_BONUS) -o $(NAME)
 	@touch .bonus
 
-$(NAME_BONUS): $(libft) $(OBJECTS_BONUS)
-	cc $(CFLAGS) $(INCLUDES_BONUS) $^ -o $@
-
-%.o : %.c
+# Pattern rule for object files
+%.o: %.c
 	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(OBJECTS_BONUS)
+	rm -f $(OBJECTS) $(OBJECTS_BONUS) .here_doc $(NAME) .bonus
 	make -C $(libft_dir) clean
 
 fclean: clean
-	rm -f $(NAME) $(NAME_BONUS)
+	rm -f $(NAME) .here_doc
 	make -C $(libft_dir) fclean
-	rm -f .bonus
 
-re:	fclean all
+re: fclean all
 
 rebonus: fclean bonus
 
 .PHONY: all clean fclean re bonus rebonus
+

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/31 21:37:39 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 19:19:25 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_vars
 {
@@ -51,10 +51,13 @@ void	error_handler3(char *str, int errnum, int errorcode);
 char	*get_path2(char **envp);
 
 void	initialize_t_vars(t_vars *t, char **argv, char **envp);
-void	test_function2(int argc, char **argv, t_vars *t);
+void	handle_fork(int argc, char **argv, t_vars *t);
 void	pids_malloc (t_vars *t);
 void	open_infile(int argc, char **argv, t_vars *t);
 void	open_outfile(int argc, char **argv, t_vars *t);
+void	first_child_fork(int argc, char **argv, t_vars *t, int i);
+void	second_child_fork(int argc, char **argv, t_vars *t, int i);
+int		pid_wait(pid_t pid);
 
 
 #endif

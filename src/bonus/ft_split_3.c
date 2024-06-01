@@ -6,12 +6,12 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:46:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/29 20:39:45 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:05:27 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
 
 int	is_delimiter(char c)
 {

@@ -6,11 +6,11 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/31 21:20:28 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:05:39 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
 
 void	free_2d_array(void **arr)
 {

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   paths_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 18:46:09 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/29 20:40:02 by upolat           ###   ########.fr       */
+/*   Created: 2024/05/31 14:35:41 by upolat            #+#    #+#             */
+/*   Updated: 2024/06/01 20:06:00 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../../include/pipex_bonus.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <fcntl.h>
-# include "libft/libft.h"
-
-int	handle_here_doc(char *argv2);
-char	**ft_split_3(char *str);
-
-#endif
+char	*get_path2(char **envp)
+{
+	if (!envp)
+		return (NULL);
+	while (*envp)
+	{
+		if (strncmp(*envp, "PATH=", 5) == 0)
+			return (*envp + 5);
+		envp++;
+	}
+	//if (*envp == NULL)
+	return (NULL);
+}

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/31 21:15:20 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 20:06:51 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
-#include "pipex_bonus.h"
+#include "../../include/pipex_bonus.h"
 
 int	handle_here_doc(int argc, char *argv2, t_vars *t)
 {
