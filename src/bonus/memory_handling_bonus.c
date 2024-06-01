@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 22:50:50 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 01:31:25 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_2d_array(void **arr)
 		i++;
 	}
 	free(arr);
+	arr = NULL;
 }
 
 void	fd_malloc(t_vars *t)

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 00:10:06 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 01:40:16 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	run_command(char **argv, t_vars *t, int index)
 		i++;
 	}
 	error_handler3(t->command, t, errno, 0);
-	free_2d_array((void **)t->command_with_arguments);
-	free_2d_array((void **)t->split_variable);
+	//free_2d_array((void **)t->command_with_arguments); // The order of these last 3 lines makes no sense, the last two will never run.
+	//free_2d_array((void **)t->split_variable);
 	return (0);
 }

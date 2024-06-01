@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 00:06:02 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 01:40:20 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	close_free_exit(t_vars *t, int exitcode)
 		close(t->here_doc_fd);
 	if (t->pid)
 		free_2d_array((void **)t->pid);
-	if (t->full_path_with_command)
-		free(t->full_path_with_command);
+	//if (t->full_path_with_command)
+	//	free(t->full_path_with_command); // When I uncomment this, getting double freeing errors from pipex tester.
 	if (t->command_with_arguments)
 		free_2d_array((void **)t->command_with_arguments);
 	if (access(".here_doc", F_OK) == 0)
