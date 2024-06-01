@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 19:56:21 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 00:08:42 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 		if (pipe(t.fd[i]) == -1)
 		{
 			close_and_free(&t);
-			error_handler3(argv[argc - 1], errno, 0);
+			error_handler3(argv[argc - 1], &t, errno, 0);
 		}
 		i++;
 	}

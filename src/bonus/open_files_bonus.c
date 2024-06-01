@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 20:07:04 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 00:07:01 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	open_infile(int argc, char **argv, t_vars *t)
 		if (t->infile_fd < 0)
 		{
 			//close_and_free(t); // ------------------------------------------------------> This needs to come after error_handler3 somehow. Otherwise I am getting "bad file descriptor" error on pipex tester, which isn't matching Bash output. Also check the contents of close_and_free. It hasn't been updated in a while.
-			error_handler3(argv[1], errno, 1);
+			error_handler3(argv[1], t, errno, 1);
 		}
 	}
 }
@@ -54,7 +54,7 @@ void	open_outfile(int argc, char **argv, t_vars *t)
 	if (t->outfile_fd < 0)
 	{	
 		//close_and_free(t);  // ------------------------------------------------------> This needs to come after error_handler3 somehow. Otherwise I am getting "bad file descriptor" error on pipex tester, which isn't matching Bash output. Also check the contents of close_and_free. It hasn't been updated in a while.
-		error_handler3(argv[argc - 1], errno, 1);
+		error_handler3(argv[argc - 1], t, errno, 1);
 	}
 /*	if (write(t->outfile_fd, "", 0) < 0) // writing 0 bytes to test if write permission exists, so that pipex tester is satisfied
 	{
