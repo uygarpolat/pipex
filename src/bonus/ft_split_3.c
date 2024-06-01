@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:46:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 20:05:27 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 01:02:34 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ int	is_delimiter(char c)
 	return (0);
 }
 
-static int skip_quoted_section(char *str, int i)
+static int	skip_quoted_section(char *str, int i)
 {
-	char quote_char = str[i];
+	char	quote_char;
+
+	quote_char = str[i];
 	i++;
 	while (str[i] && str[i] != quote_char)
 		i++;
 	if (str[i] == quote_char)
 		i++;
-
 	return (i);
 }
 
@@ -76,29 +77,46 @@ static int	word_counter(char *str)
 			else
 				i++;
 		}
-    }
-    return wc;
+	}
+	return (wc);
 }
-/*
+
 int	array_creator(char *str, char **arr, int i, int k)
 {
-	int		j;
+	int	j;
+	int	start;
+	int	end;
 
 	while (str[i])
 	{
-		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
+		while (str[i] && is_delimiter(str[i]))
 			i++;
 		j = i;
-		while (str[i] && !(str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
-       {
-            if (str[i] == '\'' || str[i] == '"')
-                i = skip_quoted_section(str, i);
-            else
-                i++;
-        }
-		if (i > j)
+		while (str[i] && !is_delimiter(str[i]))
 		{
-			arr[k] = malloc(sizeof(char *) * (i - j + 1));
+			if (str[i] == '\'' || str[i] == '"')
+			{
+				start = i + 1; // Start just after the opening quote
+				i = skip_quoted_section(str, i);
+				end = i - 1; // End just before the closing quote
+				if (i > start)
+				{
+					arr[k] = malloc(sizeof(char) * (end - start + 1));
+					if (arr[k] == NULL)
+					{
+						free_2d(arr);
+						return (0);
+					}
+					ft_strncpy(arr[k++], &str[start], end - start);
+					continue ; // Move to the next character after the quote
+				}
+			}
+			else
+				i++;
+		}
+		if (i > j && (str[j] != '\'' && str[j] != '"')) // Ensure not to start with a quote
+		{
+			arr[k] = malloc(sizeof(char) * (i - j + 1));
 			if (arr[k] == NULL)
 			{
 				free_2d(arr);
@@ -109,53 +127,6 @@ int	array_creator(char *str, char **arr, int i, int k)
 	}
 	arr[k] = NULL;
 	return (1);
-}
-*/
-
-int array_creator(char *str, char **arr, int i, int k)
-{
-    int j;
-
-    while (str[i])
-    {
-        while (str[i] && is_delimiter(str[i]))
-            i++;
-        j = i;
-        while (str[i] && !is_delimiter(str[i]))
-        {
-            if (str[i] == '\'' || str[i] == '"')
-            {
-                int start = i + 1;  // Start just after the opening quote
-                i = skip_quoted_section(str, i);
-                int end = i - 1;  // End just before the closing quote
-                if (i > start)
-                {
-                    arr[k] = malloc(sizeof(char) * (end - start + 1));
-                    if (arr[k] == NULL)
-                    {
-                        free_2d(arr);
-                        return (0);
-                    }
-                    ft_strncpy(arr[k++], &str[start], end - start);
-                    continue;  // Move to the next character after the quote
-                }
-            }
-            else
-                i++;
-        }
-        if (i > j && (str[j] != '\'' && str[j] != '"'))  // Ensure not to start with a quote
-        {
-            arr[k] = malloc(sizeof(char) * (i - j + 1));
-            if (arr[k] == NULL)
-            {
-                free_2d(arr);
-                return (0);
-            }
-            ft_strncpy(arr[k++], &str[j], i - j);
-        }
-    }
-    arr[k] = NULL;
-    return (1);
 }
 
 char	**ft_split_3(char *str)
