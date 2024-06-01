@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/31 12:52:18 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/31 21:37:39 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,38 @@
 
 typedef struct s_vars
 {
-	int		infile_fd;
-	int		outfile_fd;
-	int		*pipes;
-	int		pipe_amount;
-	int		command_amount;
-	int		here_doc;
-	pid_t	**pid;
-	char	*path_variable;
-	char	*full_path;
-	char	*full_path_with_command;
-	char	**split_variable;
-	char	**command_with_arguments;
-	char	*command;
+	char	**envp;
+	int		infile_fd; //SET
+	int		outfile_fd; //SET
+	int		**fd;
+	int		pipe_amount; //SET
+	int		command_amount; // SET
+	int		here_doc; //SET
+	int		here_doc_fd;
+	pid_t	**pid; //SET
+	char	*path_variable; //SET, was path_string, but you need to seperate path finder code from command runner code.
+	//char	*full_path; //THIS DOESN'T LOOK LIKE IT SHOULD BE IN THE STRUCT
+	char	*full_path_with_command; //SET, was cmd_path
+	char	**split_variable; // paths
+	char	**command_with_arguments; //SET, was args
+	char	*command; // SET inside of function run command (the location might have changed since last edit)
 }	t_vars;
 
-int		handle_here_doc(int argc, char *argv2);
+void	initialize_t_vars(t_vars *t, char **argv, char **envp);
+int		handle_here_doc(int argc, char *argv2, t_vars *t);
 void	free_2d_array(void **arr);
-int		**fd_malloc(int argc, int heredoc_exists);
-void	close_and_free(int **fd, int infile_fd, int outfile_fd, int argc, int heredoc_exists);
-int		run_command(char **argv, char **envp, int index);
+void	fd_malloc(t_vars *t);
+void	close_and_free(t_vars *t);
+int		run_command(char **argv, t_vars *t, int index);
 char	**ft_split_3(char *str);
-int		error_handler3(char *str, int errnum, int errorcode);
+void	error_handler3(char *str, int errnum, int errorcode);
+char	*get_path2(char **envp);
+
+void	initialize_t_vars(t_vars *t, char **argv, char **envp);
+void	test_function2(int argc, char **argv, t_vars *t);
+void	pids_malloc (t_vars *t);
+void	open_infile(int argc, char **argv, t_vars *t);
+void	open_outfile(int argc, char **argv, t_vars *t);
+
 
 #endif

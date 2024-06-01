@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 17:59:01 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/31 21:15:20 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
 #include <fcntl.h>
 #include "pipex_bonus.h"
 
-int	handle_here_doc(int argc, char *argv2)
+int	handle_here_doc(int argc, char *argv2, t_vars *t)
 {
-	int		fd;
-	int		fd2;
-	char	*str;
 	int		n;
+	char	*str;
 
-	fd = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	t->here_doc_fd = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 
 	while (1)
 	{
@@ -36,10 +34,11 @@ int	handle_here_doc(int argc, char *argv2)
 			break ;
 		if (!ft_strncmp(str, argv2, ft_strlen(argv2)) && str[ft_strlen(argv2)] == '\n')
 			break ;
-		write(fd, str, ft_strlen(str));
+		ft_putstr_fd(str, t->here_doc_fd);
+		//write(heredoc_fd, str, ft_strlen(str));
 		free(str);
 	}
-	close(fd);
-	fd2 = open(".here_doc", O_RDONLY);
-	return (fd2);
+	close(t->here_doc_fd);
+	t->here_doc_fd = open(".here_doc", O_RDONLY); // Is it ok to recycle fd like this? If it works, that's a good enough test.
+	return (t->here_doc_fd);
 }

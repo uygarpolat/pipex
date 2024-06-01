@@ -6,58 +6,48 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/31 11:16:48 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/01 15:05:02 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
+static void	execute_command(t_vars *t)
+{
+	if (access(t->full_path_with_command, F_OK) == 0)
+	{
+		if (access(t->full_path_with_command, X_OK) == 0)
+		{
+			//printf("full_path_with_command is: %s\n", t->full_path_with_command);
+			execve(t->full_path_with_command, t->command_with_arguments, t->envp);
+		}
+		error_handler3(t->full_path_with_command, errno, 126); 
+	}
+}
 
-int	run_command(char **argv, char **envp, int index)
+int	run_command(char **argv, t_vars *t, int index)
 {
 	int		i;
-	char	*path_variable;
 	char	*full_path;
-	char	*full_path_with_command;
-	char	**split_variable;
-	char	**command_with_arguments;
-	char	*command;
 
-	path_variable = NULL;
-	while (*envp)
+	t->command_with_arguments = ft_split_3(argv[index]);
+	t->command = t->command_with_arguments[0];
+	if (t->command[0] == '/' || (t->command[0] == '.' && t->command[1] == '/'))
 	{
-		if (strncmp(*envp, "PATH=", 5) == 0)
-		{
-			path_variable = *envp + 5;
-			break ;
-		}
-		envp++;
+		t->full_path_with_command = t->command;
+		execute_command(t);
 	}
-	if (!path_variable)
-	{
-		ft_printf("PATH variable not found.\n");
-		return (1);
-	}
-	split_variable = ft_split(path_variable, ':');
-	command_with_arguments = ft_split_3(argv[index]);
-	command = command_with_arguments[0];
 	i = 0;
-	while (split_variable[i])
+	while (t->split_variable[i])
 	{
-		full_path = ft_strjoin(split_variable[i], "/");
-		full_path_with_command = ft_strjoin(full_path, command);
-		//free(full_path_with_command);
-		//full_path_with_command = NULL;
+		full_path = ft_strjoin(t->split_variable[i], "/");
+		t->full_path_with_command = ft_strjoin(full_path, t->command);
 		free((void **)full_path);
-		if (access(full_path_with_command, X_OK) == 0)
-		{
-			execve(full_path_with_command, command_with_arguments, envp);
-			perror("Failed to execute command");
-		}
-		free((void **)full_path_with_command);
+		execute_command(t);
+		free((void **)t->full_path_with_command);
 		i++;
 	}
 	ft_printf("Command not found.\n");
-	free_2d_array((void **)command_with_arguments);
-	free_2d_array((void **) split_variable);
+	free_2d_array((void **)t->command_with_arguments);
+	free_2d_array((void **)t->split_variable);
 	return (0);
 }

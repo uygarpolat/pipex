@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/30 11:07:15 by upolat           ###   ########.fr       */
+/*   Updated: 2024/05/31 21:20:28 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,53 +27,50 @@ void	free_2d_array(void **arr)
 	free(arr);
 }
 
-int	**fd_malloc(int argc, int heredoc_exists)
+void	fd_malloc(t_vars *t)
 {
 	int	i;
-	int	**fd;
 
 	i = 0;
-	fd = malloc(sizeof(int *) * (argc - 4 - heredoc_exists + 1));
-	if (fd == NULL)
-		return (0);
-	while (i < argc - 4 - heredoc_exists)
+	t->fd = malloc(sizeof(int *) * (t->pipe_amount + 1));
+	if (t->fd == NULL)
+		return ; // <------------------------------------- Enter a proper error
+	while (i < t->pipe_amount)
 	{
-		fd[i] = malloc(sizeof(int) * 2);
-		if (fd[i] == NULL)
+		t->fd[i] = malloc(sizeof(int) * 2);
+		if (t->fd[i] == NULL)
 		{
-			free_2d_array((void **)fd);
-			return (0);
+			free_2d_array((void **)t->fd);
+			return ; // <------------------------------------- Enter a proper error
 		}
 		i++;
 	}
-	fd[i] = 0;
-	return (fd);
+	t->fd[i] = 0;
+	return ;
 }
 
-pid_t	**pids_malloc (int argc, int heredoc_exists)
+void	pids_malloc (t_vars *t)
 {
 	int		i;
-	int		num_iterations;
-	pid_t	**pids;
 
-	num_iterations = argc - 4 - heredoc_exists;
-	pids = malloc(num_iterations * sizeof(pid_t *));
-	if (!pids)
+	t->pid = malloc((t->pipe_amount + 1) * sizeof(pid_t *));
+	if (!t->pid)
 	{
 		perror("Failed to allocate memory for pid pointers");
-		return (0);
+		return ; //<------------------------------------- Enter a proper error
 	}
 	i = 0;
-	while (i < num_iterations)
+	while (i < t->pipe_amount)
 	{
-		pids[i] = malloc(2 * sizeof(pid_t));
-		if (!pids[i])
+		t->pid[i] = malloc(2 * sizeof(pid_t));
+		if (!t->pid[i])
 		{
 			perror("Failed to allocate memory for pid pointers");
-			free_2d_array((void **)pids);
-			return (0);
+			free_2d_array((void **)t->pid);
+			return ; // <------------------------------------- Enter a proper error
 		}
 		i++;
 	}
-	return(pids);
+	t->pid[i] = 0; // Do I need to malloc one more index position (similar to fd_malloc above), so that free_2d_array function will work?
+	return ;
 }
