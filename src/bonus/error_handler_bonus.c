@@ -6,11 +6,22 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 12:25:25 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 17:00:32 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
+
+void	error_handler1(char *str, t_vars *t, char *str2, int errorcode)
+{
+    ft_putstr_fd("pipex: ", 2);
+    ft_putstr_fd(str, 2);
+    ft_putstr_fd(": ", 2);
+    ft_putstr_fd(str2, 2);
+	ft_putstr_fd("\n", 2);
+	close_free_exit(t, errorcode);
+}
+
 
 void	error_handler3(char *str, t_vars *t, int errnum, int errorcode)
 {
@@ -20,7 +31,6 @@ void	error_handler3(char *str, t_vars *t, int errnum, int errorcode)
     ft_putstr_fd(strerror(errnum), 2);
 	ft_putstr_fd("\n", 2);
 	close_free_exit(t, errorcode);
-    //exit(errorcode);
 }
 
 void	close_and_free(t_vars *t)

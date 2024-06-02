@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 01:43:42 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 22:18:57 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	int		i;
+	int	i;
+	int	child_exit_status;
+	int	final_exit_status;
 
 	t_vars	t;
 	if (argc == 1
@@ -71,14 +73,34 @@ int	main(int argc, char **argv, char **envp)
 	handle_fork(argc, argv, &t);
 	close_and_free(&t);
 	i = 0;
+	final_exit_status = 0;
 	while (i < t.pipe_amount)
 	{
-		pid_wait(t.pid[i][0]);
-		pid_wait(t.pid[i][1]);
-		i++;
-	}
+		child_exit_status = pid_wait(t.pid[i][0]);
+		if (child_exit_status != 0)
+			final_exit_status = child_exit_status;
+
+		child_exit_status = pid_wait(t.pid[i][1]);
+		if (child_exit_status != 0)
+			final_exit_status = child_exit_status;
+        i++;
+    }
+/*
+    while (i < t.pipe_amount)
+	{
+        child_exit_status = pid_wait(t.pid[i][0]);
+        if (child_exit_status != 0 && final_exit_status == 0)
+            final_exit_status = child_exit_status;
+        child_exit_status = pid_wait(t.pid[i][1]);
+        if (child_exit_status != 0 && final_exit_status == 0)
+            final_exit_status = child_exit_status;
+        i++;
+    }
+*/
+
+
 	free_2d_array((void **) t.pid);
-	return (0);
+	return (final_exit_status);
 }
 
 int	pid_wait(pid_t pid)
@@ -105,7 +127,7 @@ void	first_child_fork(int argc, char **argv, t_vars *t, int i)
 			dup2(t->fd[i - 1][0], STDIN_FILENO);
 		dup2(t->fd[i][1], STDOUT_FILENO);
 		close_and_free(t);
-		run_command(argv, t, i + 2 + t->here_doc);
+		run_command(argc, argv, t, i + 2 + t->here_doc);
 	}
 }
 
@@ -123,7 +145,7 @@ void	second_child_fork(int argc, char **argv, t_vars *t, int i)
 		else
 			dup2(t->fd[i + 1][1], STDOUT_FILENO);
 		close_and_free(t);
-		run_command(argv, t, i + 3 + t->here_doc);
+		run_command(argc, argv, t, i + 3 + t->here_doc);
 	}
 }
 
