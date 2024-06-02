@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 22:07:04 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 13:01:07 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 		t->here_doc = 1;
 	else
 		t->here_doc = 0;
-	t->path_variable = get_path2(envp);
+	t->path_variable = get_path2(envp); // What happens if get_path2 returns NULL
 	if (t->path_variable != NULL)
 	{
 		t->split_variable = ft_split(t->path_variable, ':');
@@ -46,13 +46,10 @@ int	main(int argc, char **argv, char **envp)
 
 	t_vars	t;
 	if (argc != 5)
-		return (write(2, "Argument error!\n", 17), EXIT_FAILURE);	
-
+		return (write(2, "Argument error!\n", 17), EXIT_FAILURE);
 	initialize_t_vars(&t, argv, envp);
-	
 	t.command_amount = argc - 3 - t.here_doc;
 	t.pipe_amount = t.command_amount - 1;
-
 	fd_malloc(&t);
 	i = 0;
 	while (i < t.pipe_amount)
@@ -60,21 +57,18 @@ int	main(int argc, char **argv, char **envp)
 		if (pipe(t.fd[i]) == -1)
 		{
 			close_and_free(&t);
-			error_handler3(argv[argc - 1], errno, 0);
+			error_handler3(argv[argc - 1], &t, errno, 0);
 		}
 		i++;
 	}
-
 	pids_malloc(&t);	
 	if (!t.pid)
 	{
     	perror("Failed to allocate memory for pids");
     	return (EXIT_FAILURE);
 	}
-
 	handle_fork(argc, argv, &t);
 	close_and_free(&t);
-
 	i = 0;
 	while (i < t.pipe_amount)
 	{

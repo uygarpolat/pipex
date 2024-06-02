@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/01 20:05:39 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 12:28:50 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_2d_array(void **arr)
 		i++;
 	}
 	free(arr);
+	arr = NULL;
 }
 
 void	fd_malloc(t_vars *t)
@@ -51,7 +52,7 @@ void	fd_malloc(t_vars *t)
 
 void	pids_malloc (t_vars *t)
 {
-	int		i;
+	int	i;
 
 	t->pid = malloc((t->pipe_amount + 1) * sizeof(pid_t *));
 	if (!t->pid)
@@ -71,6 +72,6 @@ void	pids_malloc (t_vars *t)
 		}
 		i++;
 	}
-	t->pid[i] = 0; // Do I need to malloc one more index position (similar to fd_malloc above), so that free_2d_array function will work?
+	t->pid[i] = 0;
 	return ;
 }

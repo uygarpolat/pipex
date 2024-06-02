@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 01:31:25 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 12:28:50 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	fd_malloc(t_vars *t)
 
 void	pids_malloc (t_vars *t)
 {
-	int		i;
+	int	i;
 
 	t->pid = malloc((t->pipe_amount + 1) * sizeof(pid_t *));
 	if (!t->pid)

@@ -6,9 +6,9 @@ SRC_BONUS_DIR = src/bonus
 
 # Source files
 SOURCES = 		$(SRC_DIR)/pipex.c $(SRC_DIR)/here_doc.c \
-                $(SRC_DIR)/close_and_free.c $(SRC_DIR)/memory_handling.c \
+                $(SRC_DIR)/memory_handling.c $(SRC_DIR)/paths.c \
                 $(SRC_DIR)/run_command.c $(SRC_DIR)/ft_split_3.c \
-                $(SRC_DIR)/error_handler.c $(SRC_DIR)/open_files.c $(SRC_DIR)/paths.c
+                $(SRC_DIR)/error_handler.c $(SRC_DIR)/open_files.c
 SOURCES_BONUS = $(SRC_BONUS_DIR)/pipex_bonus.c $(SRC_BONUS_DIR)/here_doc_bonus.c \
                 $(SRC_BONUS_DIR)/memory_handling_bonus.c $(SRC_BONUS_DIR)/paths_bonus.c \
                 $(SRC_BONUS_DIR)/run_command_bonus.c $(SRC_BONUS_DIR)/ft_split_3.c \
