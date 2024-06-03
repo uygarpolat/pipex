@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 22:18:57 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/03 15:35:49 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 	if (t->path_variable != NULL)
 	{
 		t->split_variable = ft_split(t->path_variable, ':');
+		/*int k = 0;
+		while (t->split_variable[k])
+		{
+			printf("t->split variable's index %d is %s\n", k + 1, t->split_variable[k]);
+			k++;
+		}*/
 		//if (!t->split_variable)
 			//error_exit("ft_split malloc failed\n", t, 1); // -------------> Definitely comment this back in after creating a proper error checking function.
 	}

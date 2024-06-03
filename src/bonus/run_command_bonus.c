@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/03 09:21:22 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/03 15:50:41 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	run_command(int argc, char **argv, t_vars *t, int index)
 	{
 		full_path = ft_strjoin(t->split_variable[i], "/");
 		t->full_path_with_command = ft_strjoin(full_path, t->command);
-		free((void **)full_path);
+		free(full_path);
 		execute_command(argc, t, index);
-		free((void **)t->full_path_with_command);
+		free(t->full_path_with_command);
 		i++;
 	}
-	error_handler3(t->command, t, errno, 0);
+	error_handler3(t->command, t, errno, 100);
 	//free_2d_array((void **)t->command_with_arguments); // The order of these last 3 lines makes no sense, the last two will never run.
 	//free_2d_array((void **)t->split_variable);
 	return (0);
