@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/03 15:50:41 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/03 18:30:30 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	execute_command(int argc, t_vars *t, int index)
 		else if (index == argc - 2)
 			error_handler3("test2", t, errno, 126);
 	}
+	//else
+	//	error_handler3(t->full_path_with_command, t, errno, 1260); <----------------- Uncomment this for some interesting details when the first param is full path with command.
 }
 
 int	run_command(int argc, char **argv, t_vars *t, int index)
@@ -50,7 +52,8 @@ int	run_command(int argc, char **argv, t_vars *t, int index)
 		free(t->full_path_with_command);
 		i++;
 	}
-	error_handler3(t->command, t, errno, 100);
+	//error_handler3(t->command, t, errno, 0);
+	ft_putstr_fd(strerror(errno), 2);
 	//free_2d_array((void **)t->command_with_arguments); // The order of these last 3 lines makes no sense, the last two will never run.
 	//free_2d_array((void **)t->split_variable);
 	return (0);
