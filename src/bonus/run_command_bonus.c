@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 22:19:44 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/03 09:21:22 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	run_command(int argc, char **argv, t_vars *t, int index)
 
 	t->command_with_arguments = ft_split_3(argv[index]);
 	t->command = t->command_with_arguments[0];
-	if (t->command[0] == '/' || (t->command[0] == '.' && t->command[1] == '/'))
+	if (ft_strlen(t->command) > 0 && (t->command[0] == '/' || (t->command[0] == '.' && t->command[1] == '/')))
 	{
 		if (t->command[ft_strlen(t->command) - 1] == '/' && index == argc - 2)
 			error_handler1(t->command, t, "is a directoryyy", 126);
