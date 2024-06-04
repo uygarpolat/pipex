@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:46:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 01:02:34 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/02 16:20:58 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char	**ft_split_3(char *str)
 	char	**arr;
 
 	wc = word_counter(str);
-	arr = malloc(sizeof(char **) * (wc + 1));
+	arr = malloc(sizeof(char *) * (wc + 1));
 	if (arr == NULL)
 		return (NULL);
 	if (array_creator(str, arr, 0, 0) == 0)
