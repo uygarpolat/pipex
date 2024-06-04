@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 10:41:15 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/04 15:01:58 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	main(int argc, char **argv, char **envp)
 
 
 	int	final_exit_status;
-	//int	child_exit_status;
 	i = 0;
 
 	while (i < t.pipe_amount)

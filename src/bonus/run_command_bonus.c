@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 13:50:15 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/04 15:01:50 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ int	run_command(int argc, char **argv, t_vars *t, int index)
 
 	t->command_with_arguments = ft_split_3(argv[index]);
 	t->command = t->command_with_arguments[0];
-	
+	if (!t->path_variable && access(t->command, F_OK) != 0)
+		error_handler3(t->command, t, errno, 127);
 	if(!t->command)
 		error_handler1("test8", t, " command not found", 127);
-
+	
 	while (t->split_variable[i])
 	{
 		full_path = ft_strjoin(t->split_variable[i], "/");
