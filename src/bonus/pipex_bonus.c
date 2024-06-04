@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/03 20:16:05 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/04 10:41:15 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	int	i;
-	int	child_exit_status;
-	int	final_exit_status;
 	
 	t_vars	t;
 	if (argc == 1
@@ -78,8 +76,20 @@ int	main(int argc, char **argv, char **envp)
 	}
 	handle_fork(argc, argv, &t);
 	close_and_free(&t);
+
+
+	int	final_exit_status;
+	//int	child_exit_status;
 	i = 0;
-	final_exit_status = 0;
+
+	while (i < t.pipe_amount)
+	{
+		final_exit_status = pid_wait(t.pid[i][0]);
+		final_exit_status = pid_wait(t.pid[i][1]);
+        i++;
+    }
+
+/*
 	while (i < t.pipe_amount)
 	{
 		child_exit_status = pid_wait(t.pid[i][0]);
@@ -91,6 +101,7 @@ int	main(int argc, char **argv, char **envp)
 			final_exit_status = child_exit_status;
         i++;
     }
+*/
 /*
     while (i < t.pipe_amount)
 	{
