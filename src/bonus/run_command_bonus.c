@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 15:01:50 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/04 15:29:49 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void execute_command2(t_vars *t)
 	{
 
 		if (access(t->command, X_OK) == 0)
-			execve(t->full_path_with_command, t->command_with_arguments, t->envp);
+			execve(t->command, t->command_with_arguments, t->envp);
 		else
 			error_handler3("test5", t, errno, 126);
 	}
