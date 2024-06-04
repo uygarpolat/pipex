@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 15:01:55 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/04 21:22:01 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	close_and_free(t_vars *t)
 	//if (t->fd)
 	//	free_2d_array((void **)t->fd); // This is commented out because it is already freed at the very end of main.
 	//if (t->split_variable)
-	//	free_2d_array((void **)t->split_variable); // This was moved to close_free_exit, because first and second_child_fork functions are calling close and free early in the code, which is too soon to free split variable.
+	//	free_2d_array((void **)t->split_variable); // This was moved to close_free_exit, because first and second_child_fork functions are calling close_and_free early in the code, which is too soon to free split variable.
 
 
 }

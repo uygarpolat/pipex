@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 12:28:50 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/04 21:27:30 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_2d_array(void **arr)
 	while (arr[i])
 	{
 		free(arr[i]);
+		//arr[i] = NULL;
 		i++;
 	}
 	free(arr);
