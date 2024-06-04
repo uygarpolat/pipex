@@ -6,12 +6,12 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:46:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 16:20:58 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/04 17:09:38 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../../include/pipex_bonus.h"
+//#include "../../include/pipex_bonus.h"
 
 int	is_delimiter(char c)
 {
@@ -153,7 +153,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		i = 0;
-		arr = ft_split(argv[1]);
+		arr = ft_split_3(argv[1]);
 		if (arr == NULL)
 			return (0);
 		while (arr[i])
