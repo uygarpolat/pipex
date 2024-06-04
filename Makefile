@@ -21,7 +21,7 @@ OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
 # libft configuration
-libft_dir := libft
+libft_dir := lib/libft
 libft := $(libft_dir)/libft.a
 
 # Include directories
