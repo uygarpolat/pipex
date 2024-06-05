@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 15:44:42 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 09:07:42 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	first_child_fork(int argc, char **argv, t_vars *t, int i)
 			dup2(t->fd[i - 1][0], STDIN_FILENO);
 		dup2(t->fd[i][1], STDOUT_FILENO);
 		close_and_free(t);
-		run_command(argc, argv, t, i + 2 + t->here_doc);
+		run_command(argv, t, i + 2 + t->here_doc);
 	}
 }
 
@@ -160,7 +160,7 @@ void	second_child_fork(int argc, char **argv, t_vars *t, int i)
 		else
 			dup2(t->fd[i + 1][1], STDOUT_FILENO);
 		close_and_free(t);
-		run_command(argc, argv, t, i + 3 + t->here_doc);
+		run_command(argv, t, i + 3 + t->here_doc);
 	}
 }
 

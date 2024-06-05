@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 21:25:27 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 09:01:08 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ static int	is_file_or_dir(char *str)
 	return (0);
 }
 
-static void	execute_command(int argc, t_vars *t, int index)
+static void	execute_command(t_vars *t)
 {
-	(void)argc;		// <--- Remove argc from parameters.
-	(void)index;	// <--- Remove argc from parameters.
-
-
 	if (access(t->full_path_with_command, F_OK) == 0)
 	{
 		if (access(t->full_path_with_command, X_OK) == 0)
@@ -34,7 +30,6 @@ static void	execute_command(int argc, t_vars *t, int index)
 			execve(t->full_path_with_command, t->command_with_arguments, t->envp);
 			error_handler3("test1", t, errno, 126);
 		}
-		//else if (index == argc - 2)
 		error_handler3("test2", t, errno, 126);
 	}
 }
@@ -60,7 +55,7 @@ static void execute_command2(t_vars *t)
 	error_handler3("test6", t, errno, 127); // Is this necessary?
 }
 
-int	run_command(int argc, char **argv, t_vars *t, int index)
+int	run_command(char **argv, t_vars *t, int index)
 {
 	int		i;
 	char	*full_path;
@@ -79,7 +74,7 @@ int	run_command(int argc, char **argv, t_vars *t, int index)
 		t->full_path_with_command = ft_strjoin(full_path, t->command);
 		free(full_path);
 		full_path = NULL;
-		execute_command(argc, t, index);
+		execute_command(t);
 		free(t->full_path_with_command);
 		t->full_path_with_command = NULL;	
 		i++;
@@ -87,7 +82,7 @@ int	run_command(int argc, char **argv, t_vars *t, int index)
 	execute_command2(t);
 
 	ft_putstr_fd(strerror(errno), 2);
-	//free_2d_array((void **)t->command_with_arguments); // The order of these last 3 lines makes no sense, the last two will never run.
+	//free_2d_array((void **)t->command_with_arguments); // Are these two necessary?
 	//free_2d_array((void **)t->split_variable);
 	return (0);
 }
