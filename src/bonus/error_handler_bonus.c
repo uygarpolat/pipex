@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 11:46:18 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:17:33 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	close_free_exit(t_vars *t, int exitcode)
 	if (t->pid)
 		free_2d_array((void **)t->pid);
 	if (t->split_variable)
-		free_2d_array((void **)t->split_variable);
+		free_2d_array((void **)t->split_variable); // This is being double-freed currently. Hence the error on pipex tester from tests 18 onwards.
 	//if (t->full_path_with_command)
 	//	free(t->full_path_with_command); // When I uncomment this, getting double freeing errors from pipex tester.
 	if (t->command_with_arguments)

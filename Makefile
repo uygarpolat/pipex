@@ -1,10 +1,8 @@
 NAME = pipex
 
-# Source directories
 SRC_DIR = src/mandatory
 SRC_BONUS_DIR = src/bonus
 
-# Source files
 SOURCES = 		$(SRC_DIR)/pipex.c $(SRC_DIR)/here_doc.c \
                 $(SRC_DIR)/memory_handling.c $(SRC_DIR)/paths.c \
                 $(SRC_DIR)/run_command.c $(SRC_DIR)/ft_split_3.c \
@@ -16,18 +14,14 @@ SOURCES_BONUS = $(SRC_BONUS_DIR)/pipex_bonus.c $(SRC_BONUS_DIR)/here_doc_bonus.c
                 $(SRC_BONUS_DIR)/error_handler_bonus.c $(SRC_BONUS_DIR)/open_files_and_pipes_bonus.c \
                 $(SRC_BONUS_DIR)/handle_fork_bonus.c
 
-
-# Object files
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
-# libft configuration
 libft_dir := lib/libft
 libft := $(libft_dir)/libft.a
 
-# Include directories
 INCLUDES = -I./include -I$(libft_dir)
 
 all: $(NAME)
@@ -44,7 +38,6 @@ bonus: .bonus
 	cc $(CFLAGS) $(INCLUDES) -L$(libft_dir) -lft $(OBJECTS_BONUS) -o $(NAME)
 	@touch .bonus
 
-# Pattern rule for object files
 %.o: %.c
 	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
