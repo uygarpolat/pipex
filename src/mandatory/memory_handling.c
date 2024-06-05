@@ -6,26 +6,27 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/02 12:28:50 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:25:11 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-void	free_2d_array(void **arr)
+void	free_2d_array(void ***arr)
 {
 	int	i;
 
 	i = 0;
-	if (!arr)
+	if (!*arr)
 		return ;
-	while (arr[i])
+	while ((*arr)[i])
 	{
-		free(arr[i]);
+		free((*arr)[i]);
+		(*arr)[i] = NULL;
 		i++;
 	}
-	free(arr);
-	arr = NULL;
+	free(*arr);
+	*arr = NULL;
 }
 
 void	fd_malloc(t_vars *t)
@@ -35,30 +36,33 @@ void	fd_malloc(t_vars *t)
 	i = 0;
 	t->fd = malloc(sizeof(int *) * (t->pipe_amount + 1));
 	if (t->fd == NULL)
-		return ; // <------------------------------------- Enter a proper error
+	{
+		perror("Failed to allocate memory for file descriptors");
+		exit(EXIT_FAILURE); // CHANGE THIS AND ALL 4 EXIT STATEMENT IN THIS FILE TO ERROR_HANDLER FUNCTION!
+	}
 	while (i < t->pipe_amount)
 	{
 		t->fd[i] = malloc(sizeof(int) * 2);
 		if (t->fd[i] == NULL)
 		{
-			free_2d_array((void **)t->fd);
-			return ; // <------------------------------------- Enter a proper error
+			free_2d_array((void ***)&t->fd);
+			perror("Failed to allocate memory for file descriptors");
+			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
-	t->fd[i] = 0;
-	return ;
+	t->fd[i] = NULL;
 }
 
-void	pids_malloc (t_vars *t)
+void	pids_malloc(t_vars *t)
 {
 	int	i;
 
 	t->pid = malloc((t->pipe_amount + 1) * sizeof(pid_t *));
 	if (!t->pid)
 	{
-		perror("Failed to allocate memory for pid pointers");
-		return ; //<------------------------------------- Enter a proper error
+		perror("Failed to allocate memory for PID");
+		exit(EXIT_FAILURE);
 	}
 	i = 0;
 	while (i < t->pipe_amount)
@@ -66,12 +70,11 @@ void	pids_malloc (t_vars *t)
 		t->pid[i] = malloc(2 * sizeof(pid_t));
 		if (!t->pid[i])
 		{
-			perror("Failed to allocate memory for pid pointers");
-			free_2d_array((void **)t->pid);
-			return ; // <------------------------------------- Enter a proper error
+			free_2d_array((void ***)&t->pid);
+			perror("Failed to allocate memory for PID");
+			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
-	t->pid[i] = 0;
-	return ;
+	t->pid[i] = NULL;
 }

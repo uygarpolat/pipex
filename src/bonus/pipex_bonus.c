@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 11:44:09 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/06 01:34:02 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 {
 	t->envp = envp;
-	t->infile_fd = -2;
-	t->outfile_fd = -2;
+	t->infile_fd = -1;
+	t->outfile_fd = -1;
+	t->here_doc_fd = -1;
 	t->pid = NULL;
 	t->command = NULL;
 	t->command_with_arguments = NULL;
 	t->full_path_with_command = NULL;
+	t->split_variable = NULL;
 	if (!ft_strncmp(argv[1], "here_doc", 9))
 		t->here_doc = 1;
 	else
@@ -30,8 +32,7 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 	{
 		t->split_variable = ft_split(t->path_variable, ':');
 		if (!t->split_variable)
-			exit(EXIT_FAILURE);
-			//error_handler1("ft_split: ", t, "malloc failed.", EXIT_FAILURE);
+			error_handler3("ft_split malloc failed", t, errno, EXIT_FAILURE);
 	}
 }
 
@@ -75,14 +76,14 @@ int	main(int argc, char **argv, char **envp)
 	fd_malloc(&t);
 	create_pipes(&t);
 	pids_malloc(&t);
-	if (!t.pid)
-	{
-		perror("Failed to allocate memory for pids");
-		return (EXIT_FAILURE);
-	}
 	handle_fork(argc, argv, &t);
 	close_and_free(&t);
 	final_exit_status = wait_for_children(&t);
-	free_2d_array((void **) t.pid); // Is this necessary? How about unlinking the here_doc?
+	free_2d_array((void ***) &t.pid);
+	free_2d_array((void ***) &t.fd);
+	if (t.split_variable)
+		free_2d_array((void ***)&t.split_variable);
+	if (t.here_doc_fd >= 0)
+		close(t.here_doc_fd);
 	return (final_exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 09:01:08 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 12:08:34 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,46 +28,43 @@ static void	execute_command(t_vars *t)
 		if (access(t->full_path_with_command, X_OK) == 0)
 		{
 			execve(t->full_path_with_command, t->command_with_arguments, t->envp);
-			error_handler3("test1", t, errno, 126);
+			error_handler3(t->command, t, errno, 126);
 		}
-		error_handler3("test2", t, errno, 126);
+		error_handler3(t->command, t, errno, 126);
 	}
 }
 
-static void execute_command2(t_vars *t)
+static void	execute_command2(t_vars *t)
 {
 	if (access(t->command, F_OK) != 0)
 	{
 		if (is_file_or_dir(t->command))
-			error_handler3("test3", t, errno, 127);
+			error_handler3(t->command, t, errno, 127);
 		else
-			error_handler1("test4", t, " command not found" , 127);
-		//error_handler3("test4", t, errno, 127);
+			error_handler1(t->command, t, "command not found", 127);
 	}
 	if (is_file_or_dir(t->command))
 	{
-
 		if (access(t->command, X_OK) == 0)
 			execve(t->command, t->command_with_arguments, t->envp);
 		else
-			error_handler3("test5", t, errno, 126);
+			error_handler3(t->command, t, errno, 126);
 	}
-	error_handler3("test6", t, errno, 127); // Is this necessary?
+	error_handler3(t->command, t, errno, 127); // Is this necessary?
 }
 
 int	run_command(char **argv, t_vars *t, int index)
 {
 	int		i;
 	char	*full_path;
-	i = 0;
 
+	i = 0;
 	t->command_with_arguments = ft_split_3(argv[index]);
 	t->command = t->command_with_arguments[0];
 	if (!t->path_variable && access(t->command, F_OK) != 0)
 		error_handler3(t->command, t, errno, 127);
-	if(!t->command)
-		error_handler1("test8", t, " command not found", 127);
-	
+	if (!t->command)
+		error_handler1("", t, "command not found", 127);
 	while (t->split_variable[i])
 	{
 		full_path = ft_strjoin(t->split_variable[i], "/");
@@ -76,11 +73,10 @@ int	run_command(char **argv, t_vars *t, int index)
 		full_path = NULL;
 		execute_command(t);
 		free(t->full_path_with_command);
-		t->full_path_with_command = NULL;	
+		t->full_path_with_command = NULL;
 		i++;
 	}
 	execute_command2(t);
-
 	ft_putstr_fd(strerror(errno), 2);
 	//free_2d_array((void **)t->command_with_arguments); // Are these two necessary?
 	//free_2d_array((void **)t->split_variable);

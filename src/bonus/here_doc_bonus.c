@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 12:47:23 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 23:39:23 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	handle_here_doc(int argc, char *argv2, t_vars *t)
 		str = NULL;
 	}
 	close(t->here_doc_fd);
+	t->here_doc_fd = -1;
 	t->here_doc_fd = open(".here_doc", O_RDONLY);
 	return (t->here_doc_fd);
 	// Are you utilizing the return value elsewhere when it is negative, indicating a failed opening?

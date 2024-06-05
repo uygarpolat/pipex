@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 11:38:32 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:20:43 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_vars
 
 void	initialize_t_vars(t_vars *t, char **argv, char **envp);
 int		handle_here_doc(int argc, char *argv2, t_vars *t);
-void	free_2d_array(void **arr);
+void	free_2d_array(void ***arr);
 void	fd_malloc(t_vars *t);
 void	close_and_free(t_vars *t);
 void	close_free_exit(t_vars *t, int exitcode);
