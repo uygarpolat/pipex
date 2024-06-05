@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 11:31:28 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 11:38:32 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void	open_outfile(int argc, char **argv, t_vars *t);
 void	first_child_fork(int argc, char **argv, t_vars *t, int i);
 void	second_child_fork(int argc, char **argv, t_vars *t, int i);
 int		pid_wait(pid_t pid);
+void	create_pipes(t_vars *t);
 
 #endif

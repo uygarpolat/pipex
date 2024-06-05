@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 21:27:30 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 12:36:20 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_2d_array(void **arr)
 	while (arr[i])
 	{
 		free(arr[i]);
-		//arr[i] = NULL;
+		arr[i] = NULL;
 		i++;
 	}
 	free(arr);
@@ -36,14 +36,16 @@ void	fd_malloc(t_vars *t)
 	i = 0;
 	t->fd = malloc(sizeof(int *) * (t->pipe_amount + 1));
 	if (t->fd == NULL)
-		return ; // <------------------------------------- Enter a proper error
+		return ;
+	// Enter a proper error message
 	while (i < t->pipe_amount)
 	{
 		t->fd[i] = malloc(sizeof(int) * 2);
 		if (t->fd[i] == NULL)
 		{
 			free_2d_array((void **)t->fd);
-			return ; // <------------------------------------- Enter a proper error
+			return ;
+			// <----------- Enter a proper error
 		}
 		i++;
 	}
@@ -51,7 +53,7 @@ void	fd_malloc(t_vars *t)
 	return ;
 }
 
-void	pids_malloc (t_vars *t)
+void	pids_malloc(t_vars *t)
 {
 	int	i;
 
@@ -59,7 +61,8 @@ void	pids_malloc (t_vars *t)
 	if (!t->pid)
 	{
 		perror("Failed to allocate memory for pid pointers");
-		return ; //<------------------------------------- Enter a proper error
+		return ;
+		//<------------ Enter a proper error
 	}
 	i = 0;
 	while (i < t->pipe_amount)
@@ -69,7 +72,8 @@ void	pids_malloc (t_vars *t)
 		{
 			perror("Failed to allocate memory for pid pointers");
 			free_2d_array((void **)t->pid);
-			return ; // <------------------------------------- Enter a proper error
+			return ;
+			// <-------- Enter a proper error
 		}
 		i++;
 	}

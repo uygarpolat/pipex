@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/04 21:22:01 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 11:46:18 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 void	error_handler1(char *str, t_vars *t, char *str2, int errorcode)
 {
-    ft_putstr_fd("pipex: ", 2);
-    ft_putstr_fd(str, 2);
-    ft_putstr_fd(": ", 2);
-    ft_putstr_fd(str2, 2);
+	ft_putstr_fd("pipex: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(str2, 2);
 	ft_putstr_fd("\n", 2);
 	close_free_exit(t, errorcode);
 }
 
-
 void	error_handler3(char *str, t_vars *t, int errnum, int errorcode)
 {
-    ft_putstr_fd("pipex: ", 2);
-    ft_putstr_fd(str, 2);
-    ft_putstr_fd(": ", 2);
-    ft_putstr_fd(strerror(errnum), 2);
+	ft_putstr_fd("pipex: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errnum), 2);
 	ft_putstr_fd("\n", 2);
 	close_free_exit(t, errorcode);
 }
@@ -52,8 +51,6 @@ void	close_and_free(t_vars *t)
 	//	free_2d_array((void **)t->fd); // This is commented out because it is already freed at the very end of main.
 	//if (t->split_variable)
 	//	free_2d_array((void **)t->split_variable); // This was moved to close_free_exit, because first and second_child_fork functions are calling close_and_free early in the code, which is too soon to free split variable.
-
-
 }
 
 void	close_free_exit(t_vars *t, int exitcode)
@@ -65,7 +62,6 @@ void	close_free_exit(t_vars *t, int exitcode)
 		free_2d_array((void **)t->pid);
 	if (t->split_variable)
 		free_2d_array((void **)t->split_variable);
-
 	//if (t->full_path_with_command)
 	//	free(t->full_path_with_command); // When I uncomment this, getting double freeing errors from pipex tester.
 	if (t->command_with_arguments)
