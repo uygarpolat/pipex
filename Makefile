@@ -12,7 +12,9 @@ SOURCES = 		$(SRC_DIR)/pipex.c $(SRC_DIR)/here_doc.c \
 SOURCES_BONUS = $(SRC_BONUS_DIR)/pipex_bonus.c $(SRC_BONUS_DIR)/here_doc_bonus.c \
                 $(SRC_BONUS_DIR)/memory_handling_bonus.c $(SRC_BONUS_DIR)/paths_bonus.c \
                 $(SRC_BONUS_DIR)/run_command_bonus.c $(SRC_BONUS_DIR)/ft_split_3.c \
-                $(SRC_BONUS_DIR)/error_handler_bonus.c $(SRC_BONUS_DIR)/open_files_bonus.c
+                $(SRC_BONUS_DIR)/error_handler_bonus.c $(SRC_BONUS_DIR)/open_files_bonus.c \
+                $(SRC_BONUS_DIR)/handle_fork_bonus.c
+
 
 # Object files
 OBJECTS = $(SOURCES:.c=.o)

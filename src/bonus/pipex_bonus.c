@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 09:07:05 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/05 11:35:54 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,54 +75,6 @@ int	pid_wait(pid_t pid)
 	return (EXIT_FAILURE);
 }
 
-void	first_child_fork(int argc, char **argv, t_vars *t, int i)
-{
-	t->pid[i][0] = fork();
-	if (t->pid[i][0] == 0)
-	{
-		if (i == 0)
-		{
-			open_infile(argc, argv, t);
-			dup2(t->infile_fd, STDIN_FILENO);
-		}
-		else
-			dup2(t->fd[i - 1][0], STDIN_FILENO);
-		dup2(t->fd[i][1], STDOUT_FILENO);
-		close_and_free(t);
-		run_command(argv, t, i + 2 + t->here_doc);
-	}
-}
-
-void	second_child_fork(int argc, char **argv, t_vars *t, int i)
-{
-	t->pid[i][1] = fork();
-	if (t->pid[i][1] == 0)
-	{
-		dup2(t->fd[i][0], STDIN_FILENO);
-		if (i == t->pipe_amount - 1) // was (i == argc - 5 - heredoc_exists), focus here if errors are happening
-		{
-			open_outfile(argc, argv, t);
-			dup2(t->outfile_fd, STDOUT_FILENO);
-		}
-		else
-			dup2(t->fd[i + 1][1], STDOUT_FILENO);
-		close_and_free(t);
-		run_command(argv, t, i + 3 + t->here_doc);
-	}
-}
-
-void	handle_fork(int argc, char **argv, t_vars *t)
-{
-	int	i;
-
-	i = 0;
-	while (i < t->pipe_amount)
-	{
-		first_child_fork(argc, argv, t, i);
-		second_child_fork(argc, argv, t, i);
-		i++;
-	}
-}
 void	create_pipes(t_vars *t)
 {
 	int	i;
