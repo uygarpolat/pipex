@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/06 09:11:14 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 01:22:28 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	execute_command2(t_vars *t)
 		else
 			error_handler3(t->command, t, errno, 126);
 	}
-	error_handler3(t->command, t, errno, 127); // Is this necessary?
+	error_handler3(t->command, t, errno, 127); // Either this line or the last line of run_command function is unnecessary.
 }
 
 int	run_command(char **argv, t_vars *t, int index)
@@ -77,8 +77,6 @@ int	run_command(char **argv, t_vars *t, int index)
 		i++;
 	}
 	execute_command2(t);
-	ft_putstr_fd(strerror(errno), 2);
-	//free_2d_array((void **)t->command_with_arguments); // Are these two necessary?
-	//free_2d_array((void **)t->split_variable);
+	ft_putstr_fd(strerror(errno), 2); // Either this line or the last line of execute_command2 is unnecessary.
 	return (0);
 }
