@@ -6,13 +6,13 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:11:59 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/06 10:33:17 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:19:13 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-struct s_split
+typedef struct s_split
 {
 	int		flag;
 	int		wc;
@@ -38,25 +38,20 @@ int	is_delimiter(char c, t_split *t)
 	{
 		if (c == ' ')
 			return (1);
-		else if (c== '\'' || c == '"')
+		else if (c == '\'')
 		{
 			t->flag = 1;
 			return (1);
 		}
 	}
-	else
+	else if (t->flag == 1)
 	{
-		if (c== '\'' || c == '"')
+		if (c == '\'')
 		{
-			if (t->flag == 1)
-			{
-				
-			}
-		}
+			t->flag = 0;
 			return (1);
-		else if (c ==)
+		}
 	}
-
 	return (0);
 }
 
@@ -74,22 +69,22 @@ char	**ft_split(char *str)
 	k = 0;
 	while (str[i])
 	{
-		while (str[i] && is_delimiter(str[i], t))
+		while (str[i] && is_delimiter(str[i], &t))
 			i++;
-		if (str[i] && !is_delimiter(str[i], t))
+		if (str[i] && !is_delimiter(str[i], &t))
 			t.wc++;
-		while (str[i] && !is_delimiter(str[i], t))
+		while (str[i] && !is_delimiter(str[i], &t))
 			i++;
 	}
 	arr = malloc(sizeof(char **) * (t.wc + 1));
 	i = 0;
-
 	while (str[i])
 	{
-		while (str[i] && is_delimiter(str[i], t))
+		t.flag = 0;
+		while (str[i] && is_delimiter(str[i], &t))
 			i++;
 		j = i;
-		while (str[i] && !is_delimiter(str[i], t))
+		while (str[i] && !is_delimiter(str[i], &t))
 			i++;
 		if (i > j)
 		{
