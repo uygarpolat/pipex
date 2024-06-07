@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 20:29:42 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 22:54:03 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@
 typedef struct s_vars
 {
 	char	**envp;
-	int		infile_fd; //SET
-	int		outfile_fd; //SET
+	int		infile_fd;
+	int		outfile_fd;
 	int		**fd;
-	int		pipe_amount; //SET
-	int		command_amount; // SET
-	int		here_doc; //SET
+	int		pipe_amount;
+	int		command_amount;
+	int		here_doc;
 	int		here_doc_fd;
-	pid_t	**pid; //SET
-	char	*path_variable; //SET, was path_string,
-	char	*full_path_with_command; //SET, was cmd_path
-	char	**split_variable; // was paths
-	char	**command_with_arguments; //SET, was args
+	pid_t	**pid;
+	char	*path_variable;
+	char	*full_path_with_command;
+	char	**split_variable;
+	char	**command_with_arguments;
 	char	*command;
 }	t_vars;
 

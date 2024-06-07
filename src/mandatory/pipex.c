@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 20:59:12 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:09:56 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ int	main(int argc, char **argv, char **envp)
 	int		final_exit_status;
 	t_vars	t;
 
-	if (argc == 1
-		|| (ft_strncmp(argv[1], "here_doc", 9) == 0 && argc < 6) || argc < 5)
+	if (argc != 5)
 		return (ft_putstr_fd("Argument count incorrect.\n", 2), EXIT_FAILURE);
 	initialize_t_vars(&t, argv, envp);
 	t.command_amount = argc - 3 - t.here_doc;
