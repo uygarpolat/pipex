@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_command_bonus.c                                :+:      :+:    :+:   */
+/*   run_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 13:30:08 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 19:12:33 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	run_command(char **argv, t_vars *t, int index)
 	char	*full_path;
 
 	i = 0;
-	t->command_with_arguments = ft_split_3(argv[index]);
+	t->command_with_arguments = ft_split_2(argv[index]);
 	t->command = t->command_with_arguments[0]; // What if argv[index] is empty and this is trying to access 0th index, which is not allowed.
 	if (!t->path_variable && access(t->command, F_OK) != 0)
 		error_handler3(t->command, t, errno, 127);

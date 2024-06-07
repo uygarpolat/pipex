@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 15:45:20 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 19:12:53 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	fd_malloc(t_vars *t);
 void	close_and_free(t_vars *t);
 void	close_free_exit(t_vars *t, int exitcode);
 int		run_command(char **argv, t_vars *t, int index);
-char	**ft_split_3(char *str);
+char	**ft_split_2(char *str);
 void	error_handler1(char *str, t_vars *t, char *str2, int errorcode);
 void	error_handler3(char *str, t_vars *t, int errnum, int errorcode);
 char	*get_path2(char **envp);

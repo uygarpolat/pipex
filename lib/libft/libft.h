@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 22:44:36 by upolat            #+#    #+#             */
-/*   Updated: 2024/05/24 08:50:36 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:13:44 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_split_2
+{
+	int	i;
+	int	j;
+	int	k;
+}		t_split_2;
 
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
@@ -106,5 +113,13 @@ char			*ft_utoa(unsigned int d);
 
 // ft_printf_base.c
 int				ft_putnbr_base_unsigned(uintptr_t nb, char *base);
+
+// ft_split_2.c
+char			**ft_split_2(char *str);
+
+// ft_split_2_utils.c
+int				skip_quoted_section(char *str, int i);
+void			free_2d(char **str);
+void			ft_strncpy(char *s1, char *s2, int n);
 
 #endif
