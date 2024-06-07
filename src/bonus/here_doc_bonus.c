@@ -6,13 +6,13 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 00:22:45 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 00:31:24 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-int	handle_here_doc(int ac, char *av2, t_vars *t)
+int	handle_here_doc(int ac, char *v, t_vars *t)
 {
 	int		n;
 	char	*s;
@@ -27,7 +27,7 @@ int	handle_here_doc(int ac, char *av2, t_vars *t)
 			ft_putstr_fd("pipe ", STDOUT_FILENO);
 		ft_putstr_fd("heredoc> ", STDIN_FILENO);
 		s = get_next_line(STDIN_FILENO);
-		if (!s || (!ft_strncmp(s, av2, ft_strlen(av2)) && s[ft_strlen(av2)] == '\n'))
+		if (!s || (!ft_strncmp(s, v, ft_strlen(v)) && s[ft_strlen(v)] == '\n'))
 			break ;
 		ft_putstr_fd(s, t->here_doc_fd);
 		free(s);
