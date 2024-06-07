@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 14:05:15 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 15:55:31 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,6 @@ int	main(int argc, char **argv, char **envp)
 	handle_fork(argc, argv, &t);
 	close_and_free(&t);
 	final_exit_status = wait_for_children(&t);
-	//free_2d_array((void ***) &t.pid);
-	//free_2d_array((void ***) &t.fd);
-	//if (t.split_variable)
-	//	free_2d_array((void ***)&t.split_variable);
-	//if (t.here_doc_fd >= 0)
-	//	close(t.here_doc_fd); // Also unlink?
 	close_free_exit(&t, final_exit_status);
 	return (final_exit_status);
 }
