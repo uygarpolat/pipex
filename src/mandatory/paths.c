@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 14:35:41 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 10:54:26 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:32:28 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ char	*get_path2(char **envp)
 			return (*envp + 5);
 		envp++;
 	}
-	//if (*envp == NULL)
 	return (NULL);
 }

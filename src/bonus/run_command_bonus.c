@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 19:11:06 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 21:18:10 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,20 @@ static int	is_file_or_dir(char *str)
 
 static void	execute_command(t_vars *t)
 {
-	//ft_putstr_fd("Break point: execute_command\n", 2);
 	if (access(t->full_path_with_command, F_OK) == 0)
 	{
 		if (access(t->full_path_with_command, X_OK) == 0)
 		{
-			execve(t->full_path_with_command, t->command_with_arguments, t->envp);
+			execve(t->full_path_with_command,
+				t->command_with_arguments, t->envp);
 			error_handler3(t->command, t, errno, 126);
 		}
 		error_handler3(t->command, t, errno, 126);
 	}
 }
 
-static void	execute_command2(t_vars *t)
+static void	execute_command_absolute_path(t_vars *t)
 {
-	//ft_putstr_fd("Break point: execute_command2\n", 2);
 	if (access(t->command, F_OK) != 0)
 	{
 		if (is_file_or_dir(t->command))
@@ -62,7 +61,8 @@ int	run_command(char **argv, t_vars *t, int index)
 
 	i = 0;
 	t->command_with_arguments = ft_split_2(argv[index]);
-	t->command = t->command_with_arguments[0]; // What if argv[index] is empty and this is trying to access 0th index, which is not allowed.
+	if (t->command_with_arguments && t->command_with_arguments[0])
+		t->command = t->command_with_arguments[0]; // What if argv[index] is empty and this is trying to access 0th index, which is not allowed. REMOVE THE IF CONDITION IF PROBLEMS ARISE.
 	if (!t->path_variable && access(t->command, F_OK) != 0)
 		error_handler3(t->command, t, errno, 127);
 	if (!t->command)
@@ -78,7 +78,7 @@ int	run_command(char **argv, t_vars *t, int index)
 		t->full_path_with_command = NULL;
 		i++;
 	}
-	execute_command2(t);
-	ft_putstr_fd(strerror(errno), 2); // Either this line or the last line of execute_command2 is unnecessary.
+	execute_command_absolute_path(t);
+	//ift_putstr_fd(strerror(errno), 2); // Either this line or the last line of execute_command2 is unnecessary.
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 23:39:23 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:53:40 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,29 @@
 #include <fcntl.h>
 #include "../../include/pipex_bonus.h"
 
-int	handle_here_doc(int argc, char *argv2, t_vars *t)
+int	handle_here_doc(int ac, char *av2, t_vars *t)
 {
 	int		n;
-	char	*str;
+	char	*s;
 
 	t->here_doc_fd = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	while (1)
 	{
-		n = argc;
+		n = ac;
 		while (n-- > 5)
 			write(STDOUT_FILENO, "pipe ", 5);
 		write(STDOUT_FILENO, "heredoc> ", 9);
-		str = get_next_line(STDIN_FILENO);
-		if (!str)
+		s = get_next_line(STDIN_FILENO);
+		if (!s)
 			break ;
-		if (!ft_strncmp(str, argv2, ft_strlen(argv2))
-			&& str[ft_strlen(argv2)] == '\n')
+		if (!ft_strncmp(s, av2, ft_strlen(av2)) && s[ft_strlen(av2)] == '\n')
 			break ;
-		// Do I need to free str before exiting and after encountering one
-		// of the two if conditions above? Answer is confirmed yes.
-		// You can do it here, or after the while loop: if (buf), free (str).
-		ft_putstr_fd(str, t->here_doc_fd);
-		free(str);
-		str = NULL;
+		ft_putstr_fd(s, t->here_doc_fd);
+		free(s);
+		s = NULL;
 	}
+	if (s)
+		free(s);
 	close(t->here_doc_fd);
 	t->here_doc_fd = -1;
 	t->here_doc_fd = open(".here_doc", O_RDONLY);

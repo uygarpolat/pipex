@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:28:22 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 16:09:44 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:38:19 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	fork_fail(t_vars *t, int i, int flag)
 {
-	int limit;
+	int	limit;
 
 	limit = 0;
 	while (limit < i)

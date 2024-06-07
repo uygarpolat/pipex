@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 14:11:57 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:34:10 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	error_handler3(char *str, t_vars *t, int errnum, int errorcode)
 void	close_and_free(t_vars *t)
 {
 	int	i;
+
 	if (t->infile_fd >= 0)
 	{
 		close(t->infile_fd);
@@ -73,7 +74,7 @@ void	close_free_exit(t_vars *t, int exitcode)
 		free_2d_array((void ***)&t->split_variable);
 	if (t->full_path_with_command)
 	{
-		free(t->full_path_with_command); // When I uncomment this, I used to get double freeing errors from pipex tester.
+		free(t->full_path_with_command);
 		t->full_path_with_command = NULL;
 	}
 	if (t->command_with_arguments)

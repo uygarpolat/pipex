@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 19:12:53 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:29:42 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_path2(char **envp);
 
 void	initialize_t_vars(t_vars *t, char **argv, char **envp);
 void	handle_fork(int argc, char **argv, t_vars *t);
-void	pids_malloc (t_vars *t);
+void	pids_malloc(t_vars *t);
 void	open_infile(int argc, char **argv, t_vars *t);
 void	open_outfile(int argc, char **argv, t_vars *t);
 int		pid_wait(pid_t pid);

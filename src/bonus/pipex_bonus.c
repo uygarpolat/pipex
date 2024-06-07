@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 15:55:31 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 20:59:12 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 {
-	//(void)envp;
-	//t->envp = NULL;
 	t->envp = envp;
 	t->infile_fd = -42;
 	t->outfile_fd = -42;
@@ -71,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc == 1
 		|| (ft_strncmp(argv[1], "here_doc", 9) == 0 && argc < 6) || argc < 5)
-		return (write(2, "Argument error!\n", 17), EXIT_FAILURE); //Consider changing it to ft_putstr_fd.
+		return (ft_putstr_fd("Argument count incorrect.\n", 2), EXIT_FAILURE);
 	initialize_t_vars(&t, argv, envp);
 	t.command_amount = argc - 3 - t.here_doc;
 	t.pipe_amount = t.command_amount - 1;
