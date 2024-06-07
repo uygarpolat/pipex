@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 20:59:12 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:55:51 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 	{
 		t->split_variable = ft_split(t->path_variable, ':');
 		if (!t->split_variable)
-			error_handler3("ft_split malloc failed", t, errno, EXIT_FAILURE);
+			error_handler2("ft_split malloc failed", t, errno, EXIT_FAILURE);
 	}
 }
 

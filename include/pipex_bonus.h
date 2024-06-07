@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 22:54:03 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:54:12 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	close_free_exit(t_vars *t, int exitcode);
 int		run_command(char **argv, t_vars *t, int index);
 char	**ft_split_2(char *str);
 void	error_handler1(char *str, t_vars *t, char *str2, int errorcode);
-void	error_handler3(char *str, t_vars *t, int errnum, int errorcode);
+void	error_handler2(char *str, t_vars *t, int errnum, int errorcode);
 char	*get_path2(char **envp);
 
 void	initialize_t_vars(t_vars *t, char **argv, char **envp);

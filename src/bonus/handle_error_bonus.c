@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 23:21:42 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:54:25 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	error_handler1(char *str, t_vars *t, char *str2, int errorcode)
 	close_free_exit(t, errorcode);
 }
 
-void	error_handler3(char *str, t_vars *t, int errnum, int errorcode)
+void	error_handler2(char *str, t_vars *t, int errnum, int errorcode)
 {
 	ft_putstr_fd("pipex: ", 2);
 	ft_putstr_fd(str, 2);

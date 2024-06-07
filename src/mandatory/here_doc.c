@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   here_doc_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:12:56 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 23:33:33 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 00:00:10 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	handle_here_doc(int ac, char *av2, t_vars *t)
 	{
 		n = ac;
 		while (n-- > 5)
-			write(STDOUT_FILENO, "pipe ", 5);
-		write(STDOUT_FILENO, "heredoc> ", 9);
+			ft_putstr_fd("pipe ", STDOUT_FILENO);
+		ft_putstr_fd("heredoc> ", STDIN_FILENO);
 		s = get_next_line(STDIN_FILENO);
 		if (!s)
 			break ;

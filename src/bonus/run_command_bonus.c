@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 22:02:10 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 00:04:31 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static void	execute_command(t_vars *t)
 		{
 			execve(t->full_path_with_command,
 				t->command_with_arguments, t->envp);
-			error_handler3(t->command, t, errno, 126);
+			error_handler2(t->command, t, errno, 126);
 		}
-		error_handler3(t->command, t, errno, 126);
+		error_handler2(t->command, t, errno, 126);
 	}
 }
 
@@ -40,7 +40,7 @@ static void	execute_command_absolute_path(t_vars *t)
 	if (access(t->command, F_OK) != 0)
 	{
 		if (is_file_or_dir(t->command))
-			error_handler3(t->command, t, errno, 127);
+			error_handler2(t->command, t, errno, 127);
 		else
 			error_handler1(t->command, t, "command not found", 127);
 	}
@@ -49,9 +49,9 @@ static void	execute_command_absolute_path(t_vars *t)
 		if (access(t->command, X_OK) == 0)
 			execve(t->command, t->command_with_arguments, t->envp);
 		else
-			error_handler3(t->command, t, errno, 126);
+			error_handler2(t->command, t, errno, 126);
 	}
-	error_handler3(t->command, t, errno, 127);
+	error_handler2(t->command, t, errno, 127);
 }
 
 int	run_command(char **argv, t_vars *t, int index)
@@ -64,7 +64,7 @@ int	run_command(char **argv, t_vars *t, int index)
 	if (t->command_with_arguments && t->command_with_arguments[0])
 		t->command = t->command_with_arguments[0];
 	if (!t->path_variable && access(t->command, F_OK) != 0)
-		error_handler3(t->command, t, errno, 127);
+		error_handler2(t->command, t, errno, 127);
 	if (!t->command)
 		error_handler1(argv[index], t, "command not found", 127);
 	while (t->split_variable && t->split_variable[i])
