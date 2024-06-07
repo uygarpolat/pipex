@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 01:22:28 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 13:30:08 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	is_file_or_dir(char *str)
 
 static void	execute_command(t_vars *t)
 {
+	//ft_putstr_fd("Break point: execute_command\n", 2);
 	if (access(t->full_path_with_command, F_OK) == 0)
 	{
 		if (access(t->full_path_with_command, X_OK) == 0)
@@ -36,6 +37,7 @@ static void	execute_command(t_vars *t)
 
 static void	execute_command2(t_vars *t)
 {
+	//ft_putstr_fd("Break point: execute_command2\n", 2);
 	if (access(t->command, F_OK) != 0)
 	{
 		if (is_file_or_dir(t->command))
@@ -65,7 +67,7 @@ int	run_command(char **argv, t_vars *t, int index)
 		error_handler3(t->command, t, errno, 127);
 	if (!t->command)
 		error_handler1(argv[index], t, "command not found", 127);
-	while (t->split_variable[i])
+	while (t->split_variable && t->split_variable[i])
 	{
 		full_path = ft_strjoin(t->split_variable[i], "/");
 		t->full_path_with_command = ft_strjoin(full_path, t->command);

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 01:37:47 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:05:15 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 {
+	//(void)envp;
+	//t->envp = NULL;
 	t->envp = envp;
-	t->infile_fd = -1;
-	t->outfile_fd = -1;
-	t->here_doc_fd = -1;
+	t->infile_fd = -42;
+	t->outfile_fd = -42;
+	t->here_doc_fd = -42;
 	t->pid = NULL;
 	t->command = NULL;
 	t->command_with_arguments = NULL;
@@ -27,7 +29,7 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 		t->here_doc = 1;
 	else
 		t->here_doc = 0;
-	t->path_variable = get_path2(envp); // Whatif get_path2 returns NULL
+	t->path_variable = get_path2(t->envp);
 	if (t->path_variable != NULL)
 	{
 		t->split_variable = ft_split(t->path_variable, ':');
@@ -79,11 +81,12 @@ int	main(int argc, char **argv, char **envp)
 	handle_fork(argc, argv, &t);
 	close_and_free(&t);
 	final_exit_status = wait_for_children(&t);
-	free_2d_array((void ***) &t.pid);
-	free_2d_array((void ***) &t.fd);
-	if (t.split_variable)
-		free_2d_array((void ***)&t.split_variable);
-	if (t.here_doc_fd >= 0)
-		close(t.here_doc_fd);
+	//free_2d_array((void ***) &t.pid);
+	//free_2d_array((void ***) &t.fd);
+	//if (t.split_variable)
+	//	free_2d_array((void ***)&t.split_variable);
+	//if (t.here_doc_fd >= 0)
+	//	close(t.here_doc_fd); // Also unlink?
+	close_free_exit(&t, final_exit_status);
 	return (final_exit_status);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_files_bonus.c                                 :+:      :+:    :+:   */
+/*   open_files_and_pipes_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/05 12:38:19 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:11:43 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,10 @@ void	create_pipes(t_vars *t)
 	i = 0;
 	while (i < t->pipe_amount)
 	{
+		t->fd[i][0] = -42;
+		t->fd[i][1] = -42;
 		if (pipe(t->fd[i]) == -1)
-		{
-			close_and_free(t);
-			error_handler3("Enter a proper error handling function here!!!!!!!!!!!", t, errno, EXIT_FAILURE); // -----> Is EXIT_FAILURE correct here?
-		}
+			error_handler3("Pipe function failed!", t, errno, EXIT_FAILURE);
 		i++;
 	}
 }

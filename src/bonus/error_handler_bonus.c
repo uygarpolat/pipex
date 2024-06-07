@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/06 00:36:54 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:11:57 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ void	close_and_free(t_vars *t)
 	if (t->infile_fd >= 0)
 	{
 		close(t->infile_fd);
-		t->infile_fd = -1;
+		t->infile_fd = -42;
 	}
 	if (t->outfile_fd >= 0)
 	{
 		close(t->outfile_fd);
-		t->outfile_fd = -1;
+		t->outfile_fd = -42;
 	}
 	i = -1;
 	while (++i < t->pipe_amount)
 	{
-		if (t->fd[i][0] != -1)
+		if (t->fd[i][0] != -42)
 		{
 			close(t->fd[i][0]);
-			t->fd[i][0] = -1;
+			t->fd[i][0] = -42;
 		}
-		if (t->fd[i][1] != -1)
+		if (t->fd[i][1] != -42)
 		{
 			close(t->fd[i][1]);
-			t->fd[i][1] = -1;
+			t->fd[i][1] = -42;
 		}
 	}
 }
@@ -67,7 +67,7 @@ void	close_free_exit(t_vars *t, int exitcode)
 	if (t->here_doc_fd >= 0)
 	{
 		close(t->here_doc_fd);
-		t->here_doc_fd = -1;
+		t->here_doc_fd = -42;
 	}
 	if (t->split_variable)
 		free_2d_array((void ***)&t->split_variable);

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 01:17:05 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:11:43 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	create_pipes(t_vars *t)
 	i = 0;
 	while (i < t->pipe_amount)
 	{
-		t->fd[i][0] = -1;
-		t->fd[i][1] = -1;
+		t->fd[i][0] = -42;
+		t->fd[i][1] = -42;
 		if (pipe(t->fd[i]) == -1)
 			error_handler3("Pipe function failed!", t, errno, EXIT_FAILURE);
 		i++;
