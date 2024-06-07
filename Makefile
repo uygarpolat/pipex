@@ -19,7 +19,7 @@ OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror
 
-libft_dir := lib/libft
+libft_dir := library/libft
 libft := $(libft_dir)/libft.a
 
 INCLUDES = -I./include -I$(libft_dir)
