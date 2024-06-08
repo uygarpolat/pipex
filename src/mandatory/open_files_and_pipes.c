@@ -6,11 +6,11 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:36:46 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:50:03 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pipex_bonus.h"
+#include "../../include/pipex.h"
 
 void	open_infile(int argc, char **argv, t_vars *t)
 {

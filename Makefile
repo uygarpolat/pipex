@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 20:23:28 by upolat            #+#    #+#              #
-#    Updated: 2024/06/08 12:30:40 by upolat           ###   ########.fr        #
+#    Updated: 2024/06/08 13:01:34 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,4 +66,3 @@ re: fclean all
 rebonus: fclean bonus
 
 .PHONY: all clean fclean re bonus rebonus
-

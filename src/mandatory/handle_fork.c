@@ -6,11 +6,11 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:28:22 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:37:17 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:49:33 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pipex_bonus.h"
+#include "../../include/pipex.h"
 
 static void	fork_fail(t_vars *t, int i, int flag)
 {
