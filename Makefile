@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 20:23:28 by upolat            #+#    #+#              #
-#    Updated: 2024/06/08 13:01:34 by upolat           ###   ########.fr        #
+#    Updated: 2024/06/08 14:39:39 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,14 @@ NAME = pipex
 SRC_DIR = src/mandatory
 SRC_BONUS_DIR = src/bonus
 
-SOURCES = 		$(SRC_DIR)/pipex.c \
-                $(SRC_DIR)/handle_memory.c \
-                $(SRC_DIR)/run_command.c \
-                $(SRC_DIR)/handle_error.c $(SRC_DIR)/open_files_and_pipes.c \
-                $(SRC_DIR)/handle_fork.c
-SOURCES_BONUS = $(SRC_BONUS_DIR)/pipex_bonus.c $(SRC_BONUS_DIR)/here_doc_bonus.c \
-                $(SRC_BONUS_DIR)/handle_memory_bonus.c \
-                $(SRC_BONUS_DIR)/run_command_bonus.c \
-                $(SRC_BONUS_DIR)/handle_error_bonus.c $(SRC_BONUS_DIR)/open_files_and_pipes_bonus.c \
-                $(SRC_BONUS_DIR)/handle_fork_bonus.c
+SOURCES =		$(SRC_DIR)/pipex.c $(SRC_DIR)/handle_memory.c \
+				$(SRC_DIR)/run_command.c $(SRC_DIR)/handle_error.c \
+				$(SRC_DIR)/open_files_and_pipes.c $(SRC_DIR)/handle_fork.c \
+
+SOURCES_BONUS =	$(SRC_BONUS_DIR)/pipex_bonus.c $(SRC_BONUS_DIR)/handle_memory_bonus.c \
+				$(SRC_BONUS_DIR)/run_command_bonus.c $(SRC_BONUS_DIR)/handle_error_bonus.c \
+				$(SRC_BONUS_DIR)/open_files_and_pipes_bonus.c $(SRC_BONUS_DIR)/handle_fork_bonus.c \
+				$(SRC_BONUS_DIR)/here_doc_bonus.c \
 
 OBJECTS = $(SOURCES:.c=.o)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
