@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 20:23:28 by upolat            #+#    #+#              #
-#    Updated: 2024/06/08 14:39:39 by upolat           ###   ########.fr        #
+#    Updated: 2024/06/08 15:28:44 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ INCLUDES = -I./include -I$(libft_dir)
 all: $(NAME)
 
 $(NAME): $(OBJECTS) $(libft)
-	cc $(CFLAGS) $(INCLUDES) -L$(libft_dir) -lft $^ -o $@
+	cc $(CFLAGS) $(INCLUDES) -lft $^ -L$(libft_dir) -o $@
 
 $(libft):
 	$(MAKE) -C $(libft_dir)
@@ -45,7 +45,7 @@ $(libft):
 bonus: .bonus
 
 .bonus: $(OBJECTS_BONUS) $(libft)
-	cc $(CFLAGS) $(INCLUDES) -L$(libft_dir) -lft $(OBJECTS_BONUS) -o $(NAME)
+	cc $(CFLAGS) $(INCLUDES) -lft $(OBJECTS_BONUS) -L$(libft_dir) -o $(NAME)
 	@touch .bonus
 
 %.o: %.c
