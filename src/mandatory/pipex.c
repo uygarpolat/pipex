@@ -6,13 +6,13 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 00:07:55 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:07:15 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-void	initialize_t_vars(t_vars *t, char **argv, char **envp)
+static void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 {
 	t->envp = envp;
 	t->infile_fd = -42;
@@ -27,7 +27,7 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 		t->here_doc = 1;
 	else
 		t->here_doc = 0;
-	t->path_variable = get_path2(t->envp);
+	t->path_variable = get_path(t->envp);
 	if (t->path_variable != NULL)
 	{
 		t->split_variable = ft_split(t->path_variable, ':');
@@ -36,7 +36,7 @@ void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 	}
 }
 
-int	pid_wait(pid_t pid)
+static int	pid_wait(pid_t pid)
 {
 	int	status;
 
@@ -46,7 +46,7 @@ int	pid_wait(pid_t pid)
 	return (EXIT_FAILURE);
 }
 
-int	wait_for_children(t_vars *t)
+static int	wait_for_children(t_vars *t)
 {
 	int	i;
 	int	final_exit_status;
@@ -67,7 +67,8 @@ int	main(int argc, char **argv, char **envp)
 	int		final_exit_status;
 	t_vars	t;
 
-	if (argc != 5)
+	if (argc == 1
+		|| (ft_strncmp(argv[1], "here_doc", 9) == 0 && argc < 6) || argc < 5)
 		return (ft_putstr_fd("Argument count incorrect.\n", 2), EXIT_FAILURE);
 	initialize_t_vars(&t, argv, envp);
 	t.command_amount = argc - 3 - t.here_doc;

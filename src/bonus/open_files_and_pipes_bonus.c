@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 00:02:40 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:03:16 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,17 @@ void	create_pipes(t_vars *t)
 			error_handler2("Pipe function failed!", t, errno, EXIT_FAILURE);
 		i++;
 	}
+}
+
+char	*get_path(char **envp)
+{
+	if (!envp)
+		return (NULL);
+	while (*envp)
+	{
+		if (strncmp(*envp, "PATH=", 5) == 0)
+			return (*envp + 5);
+		envp++;
+	}
+	return (NULL);
 }
