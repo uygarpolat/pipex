@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_fork_bonus.c                                :+:      :+:    :+:   */
+/*   handle_fork.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:28:22 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 23:56:37 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:37:17 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	first_child_fork(int argc, char **argv, t_vars *t, int i)
 		if (dup2(t->fd[i][1], STDOUT_FILENO) == -1)
 			error_handler2("Dup2 fail", t, errno, EXIT_FAILURE);
 		close_and_free(t);
-		run_command(argv, t, i + 2 + t->here_doc);
+		run_command(argv, t, i + 2);
 	}
 }
 
@@ -68,7 +68,7 @@ static void	second_child_fork(int argc, char **argv, t_vars *t, int i)
 		else if (dup2(t->fd[i + 1][1], STDOUT_FILENO) == -1)
 			error_handler2("Dup2 fail", t, errno, EXIT_FAILURE);
 		close_and_free(t);
-		run_command(argv, t, i + 3 + t->here_doc);
+		run_command(argv, t, i + 3);
 	}
 }
 

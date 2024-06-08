@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_error_bonus.c                               :+:      :+:    :+:   */
+/*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 23:54:25 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:34:05 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,6 @@ void	close_and_free(t_vars *t)
 void	close_free_exit(t_vars *t, int exitcode)
 {
 	close_and_free(t);
-	if (t->here_doc_fd >= 0)
-	{
-		close(t->here_doc_fd);
-		t->here_doc_fd = -42;
-	}
 	if (t->split_variable)
 		free_2d_array((void ***)&t->split_variable);
 	if (t->full_path_with_command)

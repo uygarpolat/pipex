@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 20:23:28 by upolat            #+#    #+#              #
-#    Updated: 2024/06/08 12:05:02 by upolat           ###   ########.fr        #
+#    Updated: 2024/06/08 12:30:40 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = pipex
 SRC_DIR = src/mandatory
 SRC_BONUS_DIR = src/bonus
 
-SOURCES = 		$(SRC_DIR)/pipex.c $(SRC_DIR)/here_doc.c \
+SOURCES = 		$(SRC_DIR)/pipex.c \
                 $(SRC_DIR)/handle_memory.c \
                 $(SRC_DIR)/run_command.c \
                 $(SRC_DIR)/handle_error.c $(SRC_DIR)/open_files_and_pipes.c \

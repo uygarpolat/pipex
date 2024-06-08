@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:47:15 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:11:11 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 12:37:52 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PIPEX_BONUS_H
 
 # include <string.h>
-# include <unistd.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <sys/wait.h>
