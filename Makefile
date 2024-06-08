@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 20:23:28 by upolat            #+#    #+#              #
-#    Updated: 2024/06/08 15:28:44 by upolat           ###   ########.fr        #
+#    Updated: 2024/06/08 15:58:46 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,16 +36,23 @@ INCLUDES = -I./include -I$(libft_dir)
 
 all: $(NAME)
 
+# $(NAME): $(OBJECTS) $(libft)
+#	cc $(CFLAGS) $(INCLUDES) -lft $^ -L$(libft_dir) -o $@
+
 $(NAME): $(OBJECTS) $(libft)
-	cc $(CFLAGS) $(INCLUDES) -lft $^ -L$(libft_dir) -o $@
+	cc $(CFLAGS) $(INCLUDES) $(OBJECTS) -L$(libft_dir) -lft -o $@
 
 $(libft):
 	$(MAKE) -C $(libft_dir)
 
 bonus: .bonus
 
+# .bonus: $(OBJECTS_BONUS) $(libft)
+#	cc $(CFLAGS) $(INCLUDES) -lft $(OBJECTS_BONUS) -L$(libft_dir) -o $(NAME)
+#	@touch .bonus
+
 .bonus: $(OBJECTS_BONUS) $(libft)
-	cc $(CFLAGS) $(INCLUDES) -lft $(OBJECTS_BONUS) -L$(libft_dir) -o $(NAME)
+	cc $(CFLAGS) $(INCLUDES) $(OBJECTS_BONUS) -L$(libft_dir) -lft -o $(NAME)
 	@touch .bonus
 
 %.o: %.c
