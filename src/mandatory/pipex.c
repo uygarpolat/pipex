@@ -6,13 +6,13 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:50:14 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 14:14:36 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-static void	initialize_t_vars(t_vars *t, char **argv, char **envp)
+static void	initialize_t_vars(t_vars *t, char **envp)
 {
 	t->envp = envp;
 	t->infile_fd = -42;
@@ -29,7 +29,6 @@ static void	initialize_t_vars(t_vars *t, char **argv, char **envp)
 		if (!t->split_variable)
 			error_handler2("ft_split malloc failed", t, errno, EXIT_FAILURE);
 	}
-	(void)argv;
 }
 
 static int	pid_wait(pid_t pid)
@@ -65,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 5)
 		return (ft_putstr_fd("Argument count incorrect.\n", 2), EXIT_FAILURE);
-	initialize_t_vars(&t, argv, envp);
+	initialize_t_vars(&t, envp);
 	t.command_amount = argc - 3;
 	t.pipe_amount = t.command_amount - 1;
 	fd_malloc(&t);

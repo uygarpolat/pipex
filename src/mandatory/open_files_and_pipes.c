@@ -6,20 +6,19 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:50:03 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 14:16:55 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-void	open_infile(int argc, char **argv, t_vars *t)
+void	open_infile(char **argv, t_vars *t)
 {
 	if (access(argv[1], F_OK) == -1 || access(argv[1], R_OK) == -1)
 		error_handler2(argv[1], t, errno, EXIT_FAILURE);
 	t->infile_fd = open(argv[1], O_RDONLY);
 	if (t->infile_fd == -1)
 		error_handler2(argv[1], t, errno, EXIT_FAILURE);
-	(void)argc;
 }
 
 void	open_outfile(int argc, char **argv, t_vars *t)

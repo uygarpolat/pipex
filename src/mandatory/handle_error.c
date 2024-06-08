@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 14:23:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:49:20 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 14:17:55 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,5 @@ void	close_free_exit(t_vars *t, int exitcode)
 		free_2d_array((void ***)&t->pid);
 	if (t->fd)
 		free_2d_array((void ***)&t->fd);
-	if (access(".here_doc", F_OK) == 0)
-		unlink(".here_doc");
 	exit(exitcode);
 }

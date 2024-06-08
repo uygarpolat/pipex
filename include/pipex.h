@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 18:46:09 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:48:52 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/08 14:17:13 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	fd_malloc(t_vars *t);
 void	pids_malloc(t_vars *t);
 
 // Handle FDs and pipes and PATH
-void	open_infile(int argc, char **argv, t_vars *t);
+void	open_infile(char **argv, t_vars *t);
 void	open_outfile(int argc, char **argv, t_vars *t);
 void	create_pipes(t_vars *t);
 char	*get_path(char **envp);
