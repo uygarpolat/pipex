@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 20:23:28 by upolat            #+#    #+#              #
-#    Updated: 2024/06/08 15:58:46 by upolat           ###   ########.fr        #
+#    Updated: 2024/06/10 15:15:18 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,6 @@ INCLUDES = -I./include -I$(libft_dir)
 
 all: $(NAME)
 
-# $(NAME): $(OBJECTS) $(libft)
-#	cc $(CFLAGS) $(INCLUDES) -lft $^ -L$(libft_dir) -o $@
-
 $(NAME): $(OBJECTS) $(libft)
 	cc $(CFLAGS) $(INCLUDES) $(OBJECTS) -L$(libft_dir) -lft -o $@
 
@@ -46,10 +43,6 @@ $(libft):
 	$(MAKE) -C $(libft_dir)
 
 bonus: .bonus
-
-# .bonus: $(OBJECTS_BONUS) $(libft)
-#	cc $(CFLAGS) $(INCLUDES) -lft $(OBJECTS_BONUS) -L$(libft_dir) -o $(NAME)
-#	@touch .bonus
 
 .bonus: $(OBJECTS_BONUS) $(libft)
 	cc $(CFLAGS) $(INCLUDES) $(OBJECTS_BONUS) -L$(libft_dir) -lft -o $(NAME)
@@ -59,11 +52,11 @@ bonus: .bonus
 	cc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(OBJECTS_BONUS) .here_doc $(NAME) .bonus
+	rm -f $(OBJECTS) $(OBJECTS_BONUS) .bonus
 	make -C $(libft_dir) clean
 
 fclean: clean
-	rm -f $(NAME) .here_doc
+	rm -f $(NAME)
 	make -C $(libft_dir) fclean
 
 re: fclean all

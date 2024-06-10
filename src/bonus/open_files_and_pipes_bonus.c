@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:03:16 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/10 15:17:47 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	open_outfile(int argc, char **argv, t_vars *t)
 		if (errno == EACCES)
 			error_handler2(argv[argc - 1], t, errno, EXIT_FAILURE);
 	}
-	if (t->here_doc == 1)
-		t->outfile_fd = open(argv[argc - 1], O_APPEND | O_CREAT | O_RDWR, 0644);
-	else
-		t->outfile_fd = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0644);
+	t->outfile_fd = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0644);
 	if (t->outfile_fd == -1)
 		error_handler2(argv[argc - 1], t, errno, EXIT_FAILURE);
 }
