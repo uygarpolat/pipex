@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:07:05 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/11 18:58:13 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	wait_for_children(t_vars *t)
 
 	i = 0;
 	final_exit_status = 0;
-	while (i < t->pipe_amount)
+	while (i < t->command_amount)
 	{
 		final_exit_status = pid_wait(t->pid[i][0]);
 		final_exit_status = pid_wait(t->pid[i][1]);
