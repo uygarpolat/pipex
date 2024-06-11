@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:20:03 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 14:14:36 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/11 21:34:08 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	wait_for_children(t_vars *t)
 
 	i = 0;
 	final_exit_status = 0;
-	while (i < t->pipe_amount)
+	while (i < t->command_amount)
 	{
 		final_exit_status = pid_wait(t->pid[i][0]);
 		final_exit_status = pid_wait(t->pid[i][1]);
@@ -73,6 +73,12 @@ int	main(int argc, char **argv, char **envp)
 	handle_fork(argc, argv, &t);
 	close_and_free(&t);
 	final_exit_status = wait_for_children(&t);
+	while (1)
+	{
+		int	i;
+
+		(void)i;
+	}
 	close_free_exit(&t, final_exit_status);
 	return (final_exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 14:09:53 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 12:49:46 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/11 21:20:26 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	pids_malloc(t_vars *t)
 {
 	int	i;
 
-	t->pid = malloc((t->pipe_amount + 1) * sizeof(pid_t *));
+	t->pid = malloc((t->command_amount + 1) * sizeof(pid_t *));
 	if (!t->pid)
 		close_free_exit(t, EXIT_FAILURE);
 	i = 0;
-	while (i < t->pipe_amount)
+	while (i < t->command_amount)
 	{
 		t->pid[i] = malloc(2 * sizeof(pid_t));
 		if (!t->pid[i])
