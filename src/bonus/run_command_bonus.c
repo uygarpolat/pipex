@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 15:22:58 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/08 00:04:31 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/11 22:15:22 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	execute_command(t_vars *t)
 		{
 			execve(t->full_path_with_command,
 				t->command_with_arguments, t->envp);
-			error_handler2(t->command, t, errno, 126);
+			error_handler2(t->command, t, errno, EXIT_FAILURE);
 		}
 		error_handler2(t->command, t, errno, 126);
 	}
@@ -47,7 +47,10 @@ static void	execute_command_absolute_path(t_vars *t)
 	if (is_file_or_dir(t->command))
 	{
 		if (access(t->command, X_OK) == 0)
+		{
 			execve(t->command, t->command_with_arguments, t->envp);
+			error_handler2(t->command, t, errno, EXIT_FAILURE);
+		}
 		else
 			error_handler2(t->command, t, errno, 126);
 	}
