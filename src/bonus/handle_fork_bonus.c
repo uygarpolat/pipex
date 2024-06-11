@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:28:22 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/07 23:56:37 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/11 18:16:13 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,18 @@ static void	second_child_fork(int argc, char **argv, t_vars *t, int i)
 		fork_fail(t, i, 1);
 	if (t->pid[i][1] == 0)
 	{
-		if (dup2(t->fd[i][0], STDIN_FILENO) == -1)
+		if (dup2(t->fd[i - 1][0], STDIN_FILENO) == -1)
 			error_handler2("Dup2 fail", t, errno, EXIT_FAILURE);
-		if (i == t->pipe_amount - 1)
+		if (i == t->pipe_amount)
 		{
 			open_outfile(argc, argv, t);
 			if (dup2(t->outfile_fd, STDOUT_FILENO) == -1)
 				error_handler2("Dup2 fail", t, errno, EXIT_FAILURE);
 		}
-		else if (dup2(t->fd[i + 1][1], STDOUT_FILENO) == -1)
+		else if (dup2(t->fd[i][1], STDOUT_FILENO) == -1)
 			error_handler2("Dup2 fail", t, errno, EXIT_FAILURE);
 		close_and_free(t);
-		run_command(argv, t, i + 3 + t->here_doc);
+		run_command(argv, t, i + 2 + t->here_doc);
 	}
 }
 
@@ -77,10 +77,12 @@ void	handle_fork(int argc, char **argv, t_vars *t)
 	int	i;
 
 	i = 0;
-	while (i < t->pipe_amount)
+	while (i < t->command_amount)
 	{
-		first_child_fork(argc, argv, t, i);
-		second_child_fork(argc, argv, t, i);
+		if (i == 0)
+			first_child_fork(argc, argv, t, i);
+		else
+			second_child_fork(argc, argv, t, i);
 		i++;
 	}
 }
