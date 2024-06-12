@@ -6,7 +6,7 @@
 #    By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/15 20:23:28 by upolat            #+#    #+#              #
-#    Updated: 2024/06/11 21:55:09 by upolat           ###   ########.fr        #
+#    Updated: 2024/06/12 09:41:38 by upolat           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ clean:
 	make -C $(libft_dir) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) .here_doc
 	make -C $(libft_dir) fclean
 
 re: fclean all
