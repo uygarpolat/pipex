@@ -6,7 +6,7 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 11:28:22 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/11 18:16:13 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:24:51 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	fork_fail(t_vars *t, int i, int flag)
 	error_handler2("Fork fail", t, errno, EXIT_FAILURE);
 }
 
-static void	first_child_fork(int argc, char **argv, t_vars *t, int i)
+static void	first_child_fork(char **argv, t_vars *t, int i)
 {
 	t->pid[i][0] = fork();
 	if (t->pid[i][0] == -1)
@@ -37,7 +37,7 @@ static void	first_child_fork(int argc, char **argv, t_vars *t, int i)
 	{
 		if (i == 0)
 		{
-			open_infile(argc, argv, t);
+			open_infile(argv, t);
 			if (dup2(t->infile_fd, STDIN_FILENO) == -1)
 				error_handler2("Dup2 fail", t, errno, EXIT_FAILURE);
 		}
@@ -80,7 +80,7 @@ void	handle_fork(int argc, char **argv, t_vars *t)
 	while (i < t->command_amount)
 	{
 		if (i == 0)
-			first_child_fork(argc, argv, t, i);
+			first_child_fork(argv, t, i);
 		else
 			second_child_fork(argc, argv, t, i);
 		i++;

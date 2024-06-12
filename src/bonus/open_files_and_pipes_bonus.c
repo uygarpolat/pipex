@@ -6,19 +6,19 @@
 /*   By: upolat <upolat@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:42:31 by upolat            #+#    #+#             */
-/*   Updated: 2024/06/10 15:17:47 by upolat           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:21:38 by upolat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-void	open_infile(int argc, char **argv, t_vars *t)
+void	open_infile(char **argv, t_vars *t)
 {
 	if (t->here_doc == 0 && (access(argv[1], F_OK) == -1
 			|| access(argv[1], R_OK) == -1))
 		error_handler2(argv[1], t, errno, EXIT_FAILURE);
 	if (t->here_doc == 1)
-		t->infile_fd = handle_here_doc(argc, argv[2], t);
+		t->infile_fd = handle_here_doc(argv[2], t);
 	else
 		t->infile_fd = open(argv[1], O_RDONLY);
 	if (t->infile_fd == -1)
